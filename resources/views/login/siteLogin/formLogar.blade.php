@@ -22,20 +22,28 @@
                         @csrf
 
                         <div class="mb-3">
-                            <label for="nome" class="form-label">Número de telefone</label>
-                            <input type="number" class="form-control" name="phone" min="0" id="number"
-                                placeholder="Digite aqui o seu número" required>
+                            <label for="inputPhone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control @error('telefone') is-invalid @enderror"
+                                id="inputPhone" name="telefone" placeholder="Informe seu Telefone"
+                                value="{{ old('telefone') }}" required>
+                            @error('telefone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label for="password" class="form-label">*Senha</label>
-                            <input type="password" class="form-control" name="password" id="password"
-                                placeholder="Digite aqui sua senha" required>
+                            <label for="inputPassword" class="form-label">Senha</label>
+                            <input type="password" class="form-control @error('senha') is-invalid @enderror"
+                                id="inputPassword" name="senha" placeholder="Informe sua Senha" required>
+                            @error('senha')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn w-100 fw-bold" style="background-color: #1985e4b6; color:#f7f9fc;">Entrar</button>
-                        </div>                        
+                            <button type="submit" class="btn w-100 fw-bold"
+                                style="background-color: #1985e4b6; color:#f7f9fc;">Entrar</button>
+                        </div>
 
                         <div class="text-center mt-3">
                             <p>Não tens conta ?<a href="{{ route('register') }}" class="fcad">Criar</a></p>
