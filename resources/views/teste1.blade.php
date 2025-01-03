@@ -1,229 +1,333 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>@yield('titulo')</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
+  <title>Components / Alerts - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
-    <!-- Favicons -->
-    <link href="{{ asset('assets/assets/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('assets/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+  <!-- Favicons -->
+  <link href="{{ asset('assets/adm/assets/img/favicon.png') }}" rel="icon">
+  <link href="{{ asset('assets/adm/assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-    <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="{{ asset('https://fonts.gstatic.com') }}" rel="preconnect">
+  <link href="{{ asset('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i') }}" rel="stylesheet">
 
-    <!-- Vendor CSS Files -->
-    <link href="{{ asset('assets/assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="{{ asset('assets/adm/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/adm/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/adm/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/adm/assets/vendor/quill/quill.snow.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/adm/assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/adm/assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/adm/assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
 
-    <!-- Template Main CSS File -->
-    <link href="{{ asset('assets/assets/css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/assets/css/sig.css') }}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="{{ asset('assets//adm/assets/css/style.css') }}" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: Medilab - v4.6.0
-    * Template URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+  <!-- =======================================================
+  * Template Name: NiceAdmin
+  * Updated: Jan 29 2024 with Bootstrap v5.3.2
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
 </head>
 
 <body>
 
-<!-- Multi Columns Form -->
-{{-- <div class="d-flex align-items-center justify-content-center" style="background-color: #f7f9fc; min-height: 100vh;">
-    <div class="container p-4 bg-white shadow rounded" style="max-width: 1110px; width: 100%;">
-        <div class="row g-0">
-            <!-- Left Section -->
-            <div class="col-md-3 text-white d-flex flex-column align-items-center justify-content-center" style="background-color: #2cc3c3; padding: 2rem;">
-                <h2 class="fw-bold">Vamos começar a transformar seus planos em conquistas?</h2>
-                <p>Adicione suas informações abaixo para criar uma conta.</p>
-                <img src="your-logo-url.png" alt="Logo" style="width: 100px; margin-top: auto;">
-            </div>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
 
-            <!-- Right Section -->
-            <div class="col-md-9">
-                <form class="p-2" id="registrationForm">
-                    <!-- Row to align fields horizontally -->
-                    <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="inputName" class="form-label">Nome Completo *</label>
-                            <input type="text" class="form-control" id="inputName" name="nome" placeholder="Informe seu Nome" required>
-                        </div>
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block">NiceAdmin</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
 
-                        <div class="col-md-6">
-                            <label for="inputPhone" class="form-label">Telefone *</label>
-                            <input type="tel" class="form-control" id="inputPhone" name="telefone" placeholder="Informe seu Telefone" pattern="\(\d{2}\) \d{4,5}-\d{4}" required>
-                        </div>
-                    </div>
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
 
-                    <!-- New Row for additional fields -->
-                    <div class="row mb-3">
-                        <div class="col-md-4">
-                            <label for="inputGender" class="form-label">Sexo *</label>
-                            <select class="form-select" id="inputGender" name="sexo" required>
-                                <option value="" selected disabled>Selecione</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Feminino">Feminino</option>
-                            </select>
-                        </div>
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
 
-                        <div class="col-md-4">
-                            <label for="inputBirthday" class="form-label">Data de Aniversário *</label>
-                            <input type="date" class="form-control" id="inputBirthday" name="dataAniversario" required>
-                        </div>
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
 
-                        <div class="col-md-4">
-                            <label for="inputMaritalStatus" class="form-label">Estado Civil *</label>
-                            <select class="form-select" id="inputMaritalStatus" name="estadoCivil" required>
-                                <option value="" selected disabled>Selecione</option>
-                                <option value="Solteiro">Solteiro</option>
-                                <option value="Casado">Casado</option>
-                                <option value="Divorciado">Divorciado</option>
-                                <option value="Viúvo">Viúvo</option>
-                            </select>
-                        </div>
-                    </div>
+        <li class="nav-item dropdown">
 
-                    <div class="mb-3">
-                        <label for="inputEmail" class="form-label">E-mail *</label>
-                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Informe seu Email" required>
-                    </div>
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">4</span>
+          </a><!-- End Notification Icon -->
 
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary w-100">Criar Conta</button>
-                    </div>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              You have 4 new notifications
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-                    <p class="text-center mt-3">Ao criar a conta, você concorda com os <a href="#">Termos de uso</a> e com a <a href="#">Política de Privacidade</a>.</p>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> --}}
+            <li class="notification-item">
+              <i class="bi bi-exclamation-circle text-warning"></i>
+              <div>
+                <h4>Lorem Ipsum</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>30 min. ago</p>
+              </div>
+            </li>
 
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
+            <li class="notification-item">
+              <i class="bi bi-x-circle text-danger"></i>
+              <div>
+                <h4>Atque rerum nesciunt</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>1 hr. ago</p>
+              </div>
+            </li>
 
-{{-- <script>
-    document.getElementById('registrationForm').addEventListener('submit', function(event) {
-        const financialEntity = document.getElementById('inputFinancialEntity').value;
-        const userNumber = document.getElementById('inputUserNumber').value;
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-        if (financialEntity && !userNumber) {
-            event.preventDefault();
-            alert('Por favor, preencha o número de utente se informar a entidade financeira responsável.');
-        }
+            <li class="notification-item">
+              <i class="bi bi-check-circle text-success"></i>
+              <div>
+                <h4>Sit rerum fuga</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>2 hrs. ago</p>
+              </div>
+            </li>
 
-        const password = document.getElementById('inputPassword').value;
-        const confirmPassword = document.getElementById('inputConfirmPassword').value;
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-        if (password !== confirmPassword) {
-            event.preventDefault();
-            alert('As senhas não coincidem. Por favor, verifique e tente novamente.');
-        }
-    });
-</script> --}}
+            <li class="notification-item">
+              <i class="bi bi-info-circle text-primary"></i>
+              <div>
+                <h4>Dicta reprehenderit</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>4 hrs. ago</p>
+              </div>
+            </li>
 
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li class="dropdown-footer">
+              <a href="#">Show all notifications</a>
+            </li>
 
-    <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Multi Columns Form</h5>
+          </ul><!-- End Notification Dropdown Items -->
 
-            <!-- Multi Columns Form -->
-            <form class="row g-3">
-                <div class="col-md-6">
-                    <label for="inputEmail5" class="form-label">Nome Com</label>
-                    <input type="email" class="form-control" id="inputEmail5">
+        </li><!-- End Notification Nav -->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">3</span>
+          </a><!-- End Messages Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <li class="dropdown-header">
+              You have 3 new messages
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>Maria Hudson</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>4 hrs. ago</p>
                 </div>
-                <div class="col-md-6">
-                    <label for="inputPassword5" class="form-label">Email</label>
-                    <input type="password" class="form-control" id="inputPassword5">
-                </div>
-                <div class="col-md-6">
-                    <label for="inputEmail5" class="form-label">Senha</label>
-                    <input type="email" class="form-control" id="inputEmail5">
-                </div>
-                <div class="col-md-6">
-                    <label for="inputPassword5" class="form-label">confSenha</label>
-                    <input type="password" class="form-control" id="inputPassword5">
-                </div>
-                <div class="col-md-6">
-                    <label for="inputEmail5" class="form-label">telefo</label>
-                    <input type="email" class="form-control" id="inputEmail5">
-                </div>
-                <div class="col-md-6">
-                    <label for="inputPassword5" class="form-label">morada</label>
-                    <input type="password" class="form-control" id="inputPassword5">
-                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-                <div class="col-md-4">
-                    <label for="inputState" class="form-label">dateAniv</label>
-                    <select id="inputState" class="form-select">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>Anna Nelson</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>6 hrs. ago</p>
                 </div>
-                <div class="col-md-4">
-                    <label for="inputState" class="form-label">sexo</label>
-                    <select id="inputState" class="form-select">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="inputState" class="form-label">Estado Civil</label>
-                    <select id="inputState" class="form-select">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="inputEmail5" class="form-label">Loca</label>
-                    <input type="email" class="form-control" id="inputEmail5">
-                </div>
-                <div class="col-md-6">
-                    <label for="inputPassword5" class="form-label">codPo</label>
-                    <input type="password" class="form-control" id="inputPassword5">
-                </div>
-                <div class="col-md-6">
-                    <label for="inputEmail5" class="form-label">Segurad</label>
-                    <input type="email" class="form-control" id="inputEmail5">
-                </div>
-                <div class="col-md-6">
-                    <label for="inputPassword5" class="form-label">N segura</label>
-                    <input type="password" class="form-control" id="inputPassword5">
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-                
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-            </form><!-- End Multi Columns Form -->
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>David Muldon</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>8 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
 
-        </div>
-    </div>
+            <li class="dropdown-footer">
+              <a href="#">Show all messages</a>
+            </li>
 
-    <!-- Vendor JS Files -->
-    <script src="{{ asset('assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
-    <script src="{{ asset('assets/assets/vendor/php-email-form/validate.js') }}"></script>
-    <script src="{{ asset('assets/assets/vendor/purecounter/purecounter.js') }}"></script>
-    <script src="{{ asset('assets/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+          </ul><!-- End Messages Dropdown Items -->
 
-    <!-- Template Main JS File -->
-    <script src="{{ asset('assets/assets/js/main.js') }}"></script>
+        </li><!-- End Messages Nav -->
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Kevin Anderson</h6>
+              <span>Web Designer</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Need Help?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="#">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="index.html">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="components-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          
+          <li>
+            <a href="components-carousel.html">
+              <i class="bi bi-circle"></i><span>Carousel</span>
+            </a>
+          </li>
+          
+        </ul>
+      </li><!-- End Components Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="forms-elements.html">
+              <i class="bi bi-circle"></i><span>Form Elements</span>
+            </a>
+          </li>          
+        </ul>
+      </li><!-- End Forms Nav -->
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+  
+ 
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ asset('assets/adm/assets/assets/vendor/apexcharts/apexcharts.min.js') }}"></script>
+  <script src="{{ asset('assets/adm/assets/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('assets/adm/assets/assets/vendor/chart.js/chart.umd.js') }}"></script>
+  <script src="{{ asset('assets/adm/assets/assets/vendor/echarts/echarts.min.js') }}"></script>
+  <script src="{{ asset('assets/adm/assets/assets/vendor/quill/quill.min.js') }}"></script>
+  <script src="{{ asset('assets/adm/assets/assets/vendor/simple-datatables/simple-datatables.js') }}"></script>
+  <script src="{{ asset('assets/adm/assets/assets/vendor/tinymce/tinymce.min.js') }}"></script>
+  <script src="{{ asset('assets/adm/assets/assets/vendor/php-email-form/validate.js') }}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
 
 </body>
 
