@@ -31,14 +31,31 @@ class AutenticacaoController extends Controller
             'numSegura'     => intval($request['numSegura'] ?? 0), // Converte para inteiro seguro
         ];
 
-        // Criação do Usuário
-        $user = User::create([
-            'nome'     => $sanitizedData['nome'],
-            'sexo'     => $sanitizedData['sexo'],
-            'telefone' => $sanitizedData['telefone'],
-            'email'    => $sanitizedData['email'],
-            'senha'    => $sanitizedData['senha'],
-        ]);
+        if ($request['senha'] == null) {
+            
+            $senha = random_int(1, 1000);
+
+            // Criação do Usuário
+            $user = User::create([
+                'nome'     => $sanitizedData['nome'],
+                'sexo'     => $sanitizedData['sexo'],
+                'telefone' => $sanitizedData['telefone'],
+                'email'    => $sanitizedData['email'],
+                'senha'    => $sanitizedData['senha'],
+            ]);
+
+        }else {
+
+            // Criação do Usuário
+            $user = User::create([
+                'nome'     => $sanitizedData['nome'],
+                'sexo'     => $sanitizedData['sexo'],
+                'telefone' => $sanitizedData['telefone'],
+                'email'    => $sanitizedData['email'],
+                'senha'    => $sanitizedData['senha'],
+            ]);
+        }
+
 
         // Criação do Relacionamento com Utente
         $utente = $user->utente()->create([
@@ -69,7 +86,7 @@ class AutenticacaoController extends Controller
         $validated = $request->validate([
             'telefone' => 'required|string|min:9|max:9',
             'senha'    => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
-        ],[
+        ], [
             'telefone.required' => 'O campo telefone é obrigatório.',
             'telefone.string'   => 'O campo telefone deve ser uma string.',
             'telefone.max'      => 'O campo telefone não deve exceder 9 caracteres.',
@@ -80,7 +97,7 @@ class AutenticacaoController extends Controller
             'senha.max'      => 'O campo senha não deve exceder 20 caracteres.',
             'senha.regex'    => 'A senha deve incluir letras maiúsculas, minúsculas, números e caracteres especiais.',
         ]);
-        
+
         // Sanitização dos Dados
         $sanitizedData = [
             'telefone' => preg_replace('/\D/', '', $validated['telefone'] ?? ''), // Remove não numéricos

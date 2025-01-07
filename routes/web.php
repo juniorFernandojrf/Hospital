@@ -22,10 +22,13 @@ Route::middleware(['throttle:10,1'])->group(function () {
 
 // Route View 
 Route::prefix('admin')->group(function(){
-    Route::view('/sec', 'layout.admin.home');  
-
+    // Route::view('/sec', 'layout.admin.home');  
+    Route::view('/sec', 'layout.recpccao.cadastro'); 
+    
     Route::view('/login', 'login.adminLogin.login')->name('admin.login');
     Route::post('/login', [AutenticacaoController::class, 'login'])->name('admin.login');
 });
 
 Route::view('/teste', 'teste1');
+
+// Route::view('/sec', 'layout.recpccao.cadastro');  

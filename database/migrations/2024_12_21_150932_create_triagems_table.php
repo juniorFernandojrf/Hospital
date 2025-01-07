@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('Temperatura'); 
             $table->text('queixasInicias');
             $table->text('descricao');
-            $table->text('ClassificRiscos'); 
+            $table->enum('ClassificRiscos',['Normal','Urgente','Emergencia']);
             $table->softDeletes();
             $table->timestamps();
         });
