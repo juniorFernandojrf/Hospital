@@ -14,7 +14,7 @@ class UserService
             'sexo'     => $dados['sexo'],
             'telefone' => $dados['telefone'],
             'email'    => $dados['email'],
-            'senha'    => Hash::make($dados['senha']),
+            'senha'    => $dados['senha'],
         ]);
     }
 

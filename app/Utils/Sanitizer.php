@@ -2,9 +2,11 @@
 
 namespace App\Utils;
 
-class Sanitizer
+use App\Services\DataSanitizacaoServiceInterface;
+
+class DataSanitizationService implements DataSanitizacaoServiceInterface
 {
-    public static function sanitize(array $dados): array
+    public function sanitize(array $dados): array
     {
         return [
             'nome'     => strip_tags($dados['nome']), // Remove tags HTML

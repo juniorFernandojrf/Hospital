@@ -9,55 +9,67 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\RateLimiter;
 
+use function Laravel\Prompts\password;
+
 class AutenticacaoController extends Controller
-{
-    public function register(Request $request)
+{         
+    public function register(RegisterRequest $request)
     {
-        // $validated  = request()->validated();
+        $validated  = request()->validated();
+
+        // Verifica se a senha foi enviada no formulário
+        if (!$validated->filled('senha')) {
+
+           // Conjunto de caracteres para gerar a senha
+           $caracters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=';
+           $senha = '';
+
+           // Garantir que haja ao menos uma letra maiúscula, uma minúscula, um número e um caractere especial
+           $senha .= $caracters[rand(26, 51)]; // Uma letra maiúscula
+           $senha .= $caracters[rand(0, 25)];  // Uma letra minúscula
+           $senha .= $caracters[rand(52, 61)]; // Um número
+           $senha .= $caracters[rand(62, strlen($caracters) - 1)]; // Um caractere especial
+
+           // Preencher o restante da senha com caracteres aleatórios
+           for ($i = 4; $i < 12; $i++) {
+               $senha .= $caracters[rand(0, strlen($caracters) - 1)];
+           }
+           
+           // Embaralhar a senha para distribuir os caracteres
+           $senha = str_shuffle($senha);
+
+           $sanitizedData['senha'] = Hash::make($senha);  // Hasheia a senha(criptogafia) 
+           
+        } else {
+            $sanitizedData['senha'] = Hash::make($validated['senha']);  // Hasheia a senha(criptogafia)            
+        }
 
         // Sanitização dos Dados
         $sanitizedData = [
-            'nome'     => strip_tags($request['nome']), // Remove tags HTML
-            'sexo'     => strip_tags($request['sexo']), // Remove tags HTML
-            'telefone' => preg_replace('/\D/', '', $request['telefone'] ?? ''), // Remove não numéricos
-            'email'    => filter_var($request['email'], FILTER_SANITIZE_EMAIL), // Sanitiza e-mail
-            'senha'    => Hash::make($request['senha']),       // Hasheia a senha(criptogafia)
-            'dataAnivers'   => $request['dataAnivers'] ?? null, // Mantém data válida
-            'morada'        => htmlspecialchars($request['morada'] ?? '', ENT_QUOTES, 'UTF-8'),      // Escapa caracteres especiais
-            'localizacao'   => htmlspecialchars($request['localizacao'] ?? '', ENT_QUOTES, 'UTF-8'), // Escapa caracteres especiais
-            'estadoCivil'   => strip_tags($request['estadoCivil'] ?? ''), // Remove tags HTML
-            'codigoPostal'  => htmlspecialchars($request['codigoPostal'] ?? '', ENT_QUOTES, 'UTF-8'),   // Escapa caracteres especiais
-            'entidaFinance' => htmlspecialchars($request['entidaFinance'] ?? '', ENT_QUOTES, 'UTF-8'),  // Escapa caracteres especiais
-            'numSegura'     => intval($request['numSegura'] ?? 0), // Converte para inteiro seguro
+            'nome'     => strip_tags($validated['nome']), // Remove tags HTML
+            'sexo'     => strip_tags($validated['sexo']), // Remove tags HTML
+            'telefone' => preg_replace('/\D/', '', $validated['telefone'] ?? ''), // Remove não numéricos
+            'email'    => filter_var($validated['email'], FILTER_SANITIZE_EMAIL), // Sanitiza e-mail
+            'dataAnivers'   => $validated['dataAnivers'] ?? null, // Mantém data válida
+            'morada'        => htmlspecialchars($validated['morada'] ?? '', ENT_QUOTES, 'UTF-8'),      // Escapa caracteres especiais
+            'localizacao'   => htmlspecialchars($validated['localizacao'] ?? '', ENT_QUOTES, 'UTF-8'), // Escapa caracteres especiais
+            'estadoCivil'   => strip_tags($validated['estadoCivil'] ?? ''), // Remove tags HTML
+            'codigoPostal'  => htmlspecialchars($validated['codigoPostal'] ?? '', ENT_QUOTES, 'UTF-8'),   // Escapa caracteres especiais
+            'entidaFinance' => htmlspecialchars($validated['entidaFinance'] ?? '', ENT_QUOTES, 'UTF-8'),  // Escapa caracteres especiais
+            'numSegura'     => intval($validated['numSegura'] ?? 0), // Converte para inteiro seguro
         ];
+        
 
-        if ($request['senha'] == null) {
-            
-            $senha = random_int(1, 1000);
+        // Criação do Usuário
+        $user = User::create([
+            'nome'     => $sanitizedData['nome'],
+            'sexo'     => $sanitizedData['sexo'],
+            'telefone' => $sanitizedData['telefone'],
+            'email'    => $sanitizedData['email'],
+            'senha'    => $sanitizedData['senha'],
+        ]);
 
-            // Criação do Usuário
-            $user = User::create([
-                'nome'     => $sanitizedData['nome'],
-                'sexo'     => $sanitizedData['sexo'],
-                'telefone' => $sanitizedData['telefone'],
-                'email'    => $sanitizedData['email'],
-                'senha'    => $sanitizedData['senha'],
-            ]);
-
-        }else {
-
-            // Criação do Usuário
-            $user = User::create([
-                'nome'     => $sanitizedData['nome'],
-                'sexo'     => $sanitizedData['sexo'],
-                'telefone' => $sanitizedData['telefone'],
-                'email'    => $sanitizedData['email'],
-                'senha'    => $sanitizedData['senha'],
-            ]);
-        }
-
-
-        // Criação do Relacionamento com Utente
+        // Criação do Relacionamento com Utente bolt.new
         $utente = $user->utente()->create([
             'dataAnivers'  => $sanitizedData['dataAnivers'],
             'morada'       => $sanitizedData['morada'],
@@ -78,6 +90,14 @@ class AutenticacaoController extends Controller
 
         return redirect()->intended(route('inicio'))->with('success', 'Cadastro realizado com sucesso.');
     }
+    
+    public function cadastrar (Request $request) {
+
+        
+
+    }
+
+
 
     public function login(Request $request)
     {

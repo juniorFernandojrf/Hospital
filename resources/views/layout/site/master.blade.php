@@ -38,7 +38,7 @@
 </head>
 
 <body>
-
+  
     @include('layout.site.header')
     
     <div class="">
