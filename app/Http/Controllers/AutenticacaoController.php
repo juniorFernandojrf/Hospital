@@ -90,12 +90,6 @@ class AutenticacaoController extends Controller
 
         return redirect()->intended(route('inicio'))->with('success', 'Cadastro realizado com sucesso.');
     }
-    
-    public function cadastrar (Request $request) {
-
-        
-
-    }
 
 
 
@@ -165,4 +159,12 @@ class AutenticacaoController extends Controller
         // Redirecionar o usuário para a página inicial ou de login com mensagem de sucesso
         return redirect()->route('login')->with('success', 'Você foi desconectado com sucesso.');
     }
+
+    // public function form_login(){
+    //     return view('Autenticacao.login');
+    // }
+
+    // public function form_cadastro(){
+    //     return view('Autenticacao.cadastro');
+    // }
 }

@@ -12,7 +12,7 @@ class AtendimentoController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -20,7 +20,7 @@ class AtendimentoController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**

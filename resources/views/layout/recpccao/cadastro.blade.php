@@ -2,7 +2,6 @@
 @section('titulo', 'LA VIDA')
 @section('content')
 
-
     <!-- Right Section -->
     <div class="col-md-9">
         <form class="p-2" id="registrationForm" action="{{ route('register') }}" method="POST">

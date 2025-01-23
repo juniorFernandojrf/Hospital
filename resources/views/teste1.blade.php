@@ -7,103 +7,93 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <!-- Login Section -->
-        <div id="loginSection" class="section active">
-            <div class="login-container">
-                <h1>Hospital Management System</h1>
-                <div class="login-form">
-                    <input type="text" id="username" placeholder="Username" required>
-                    <input type="password" id="password" placeholder="Password" required>
-                    <select id="userType">
-                        <option value="receptionist">Receptionist</option>
-                        <option value="nurse">Nurse</option>
-                        <option value="doctor">Doctor</option>
-                        <option value="admin">Administrator</option>
-                    </select>
-                    <button onclick="login()">Login</button>
+    <div class="col-md-9">
+        <form class="p-2" id="registrationForm" action="{{ route('register')}}" method="POST">
+            @csrf
+            <!-- Row to align fields horizontally -->
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="inputName" class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control @error('nome') is-invalid @enderror"
+                        id="inputName" name="nome" placeholder="Informe seu Nome" value="{{ old('nome') }}"
+                        required>
+                    @error('nome')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputEmail" class="form-label">E-mail</label>
+                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                        id="inputEmail" name="email" placeholder="Informe seu E-mail"
+                        value="{{ old('email') }}" required>
+                    @error('email')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
-        </div>
 
-        <!-- Dashboard Section -->
-        <div id="dashboardSection" class="section">
-            <nav class="sidebar">
-                <div class="user-info">
-                    <img id="userAvatar" src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150" alt="User avatar">
-                    <span id="userName">User Name</span>
-                    <span id="userRole">Role</span>
-                </div>
-                <ul id="menuItems">
-                    <!-- Menu items will be dynamically populated based on user role -->
-                </ul>
-                <button onclick="logout()" class="logout-btn">Logout</button>
-            </nav>
-
-            <main class="main-content">
-                <!-- Appointment Management -->
-                <div id="appointmentModule" class="module">
-                    <h2>Appointment Management</h2>
-                    <div class="action-bar">
-                        <button onclick="showAppointmentForm()">New Appointment</button>
-                        <input type="date" id="appointmentDate" onchange="filterAppointments()">
-                    </div>
-                    <div id="appointmentsList" class="list-container"></div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="inputPassword" class="form-label">Senha</label>
+                    <input type="password" class="form-control @error('senha') is-invalid @enderror"
+                        id="inputPassword" name="senha" placeholder="Informe sua Senha" required>
+                    @error('senha')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
-                <!-- Patient Records -->
-                <div id="recordsModule" class="module">
-                    <h2>Patient Records</h2>
-                    <div class="action-bar">
-                        <button onclick="showPatientForm()">New Patient</button>
-                        <input type="text" id="searchPatient" placeholder="Search patients..." onkeyup="searchPatients()">
-                    </div>
-                    <div id="patientsList" class="list-container"></div>
+                <div class="col-md-6">
+                    <label for="inputPasswordConfirmation" class="form-label">Confirmar Senha</label>
+                    <input type="password"
+                        class="form-control @error('senha_confirmation') is-invalid @enderror"
+                        id="inputPasswordConfirmation" name="senha_confirmation"
+                        placeholder="Confirme sua Senha" required>
+                    @error('senha_confirmation')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+            </div>
+
+            <!-- New Row for additional fields -->
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label for="inputPhone" class="form-label">Telefone</label>
+                    <input type="tel" class="form-control @error('telefone') is-invalid @enderror"
+                        id="inputPhone" name="telefone" placeholder="Informe seu Telefone"
+                        value="{{ old('telefone') }}" required>
+                    @error('telefone')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
+                
+
+                <div class="col-md-4">
+                    <label for="inputGender" class="form-label">Sexo</label>
+                    <select class="form-select @error('sexo') is-invalid @enderror" id="inputGender"
+                        name="sexo" required>
+                        <option value="" disabled selected>Selecione o sexo</option>
+                        <option value="Masculino" {{ old('sexo') == 'Masculino' ? 'selected' : '' }}>Masculino
+                        </option>
+                        <option value="Feminino" {{ old('sexo') == 'Feminino' ? 'selected' : '' }}>Feminino
+                        </option>
+                    </select>
+                    @error('sexo')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
-                <!-- Screening Module -->
-                <div id="screeningModule" class="module">
-                    <h2>Patient Screening</h2>
-                    <div class="screening-form">
-                        <input type="text" id="patientId" placeholder="Patient ID">
-                        <div class="vital-signs">
-                            <input type="number" id="temperature" placeholder="Temperature">
-                            <input type="number" id="bloodPressure" placeholder="Blood Pressure">
-                            <input type="number" id="heartRate" placeholder="Heart Rate">
-                        </div>
-                        <textarea id="symptoms" placeholder="Symptoms"></textarea>
-                        <button onclick="saveScreening()">Save Screening</button>
-                    </div>
-                    <div id="screeningsList" class="list-container"></div>
-                </div>
+               
+            </div>            
 
-                <!-- Admin Module -->
-                <div id="adminModule" class="module">
-                    <h2>Administration</h2>
-                    <div class="admin-dashboard">
-                        <div class="stats-container">
-                            <div class="stat-card">
-                                <h3>Total Patients</h3>
-                                <span id="totalPatients">0</span>
-                            </div>
-                            <div class="stat-card">
-                                <h3>Today's Appointments</h3>
-                                <span id="todayAppointments">0</span>
-                            </div>
-                            <div class="stat-card">
-                                <h3>Active Staff</h3>
-                                <span id="activeStaff">0</span>
-                            </div>
-                        </div>
-                        <div class="staff-management">
-                            <h3>Staff Management</h3>
-                            <button onclick="showStaffForm()">Add Staff Member</button>
-                            <div id="staffList" class="list-container"></div>
-                        </div>
-                    </div>
-                </div>
-            </main>
-        </div>
+            <div class="text-center">
+                <button type="submit" class="btn w-100 fw-bold" style="background-color: #1985e4b6; color:#f7f9fc;">Criar
+                    Conta</button>
+            </div>
+            <div class="text-center mt-3">
+                <p>Ja tenho uma conta!<a href="{{ route('login') }}" class="fcad">Entrar</a></p>
+            </div>
+        </form>
     </div>
     <script src="app.js"></script>
 </body>
