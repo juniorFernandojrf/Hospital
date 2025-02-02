@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Especialidade;
+use App\Models\PessoalClinico;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+       $dateEsp    = Especialidade::paginate();
+       $datePclino = PessoalClinico::paginate();
+       view()->share('dateEsp', $dateEsp);
     }
 }

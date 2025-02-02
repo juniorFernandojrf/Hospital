@@ -16,6 +16,7 @@ class Especialidade extends Model
      */
     protected $fillable = [
         'nome',
+        'estado',
     ];
 
     public function pessoalClinico()

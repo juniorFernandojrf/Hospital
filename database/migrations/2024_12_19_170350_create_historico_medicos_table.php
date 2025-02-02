@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('utente_id')->constrained()->cascadeOnDelete();
             $table->foreignId('historico_familiar_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('boletins_vacina_id')   ->constrained()->cascadeOnDelete();
             $table->string('alergia');
             $table->string('medicamentosEmUso');
             $table->string('estiloDeVida');

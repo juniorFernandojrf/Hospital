@@ -9,11 +9,20 @@ class PessoalClinico extends Model
 {
     use HasFactory;
 
+      /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'numeroOrdem',
+    ];
+
     // Relacionamento entre um PessoalClinico e Utente
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
+    }    
 
     // Relacionamento entre um PessoalClinico e Especialidades
     public function especialidades()

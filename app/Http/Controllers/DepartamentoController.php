@@ -12,54 +12,69 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        //
+        return view('teste1');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function cadastrar(Request $request)
     {
-        //
+        $dados = Departamento::create([
+            'nome'   => $request->nome,
+            'sector' => $request->sector,
+            'codigo' => $request->codigo
+        ]);
+
+        return "feitoooo";
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function listar() {
+        return;
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Departamento $departamento)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for creating a new resource.
+    //  */
+    // public function create()
+    // {
+    //     //
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Departamento $departamento)
-    {
-        //
-    }
+    // /**
+    //  * Store a newly created resource in storage.
+    //  */
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Departamento $departamento)
-    {
-        //
-    }
+    // /**
+    //  * Display the specified resource.
+    //  */
+    // public function show(Departamento $departamento)
+    // {
+    //     //
+    // }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Departamento $departamento)
-    {
-        //
-    }
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  */
+    // public function edit(Departamento $departamento)
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Update the specified resource in storage.
+    //  */
+    // public function update(Request $request, Departamento $departamento)
+    // {
+    //     //
+    // }
+
+    // /**
+    //  * Remove the specified resource from storage.
+    //  */
+    // public function destroy(Departamento $departamento)
+    // {
+    //     //
+    // }
 }

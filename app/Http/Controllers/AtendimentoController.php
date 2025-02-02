@@ -12,14 +12,18 @@ class AtendimentoController extends Controller
      */
     public function index()
     {
-        
-    }
+        $dateAtend = Atendimento::paginate(10);
 
+        return view('PClinico.Recepcionista.paginas.listar.listar_paciente', compact('dateAtend'));
+    
+    }
+    
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        return view('PClinico.Recepcionista.paginas.cadastrar.cadastrar_paciente');
         
     }
 
@@ -28,7 +32,7 @@ class AtendimentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -61,5 +65,14 @@ class AtendimentoController extends Controller
     public function destroy(Atendimento $atendimento)
     {
         //
+    }
+    
+    public function consuta() {
+
+        return view('PClinico.Recepcionista.paginas.agendar.agendamento_consulta');
+    }
+
+    public function exame() {
+        return view('PClinico.Recepcionista.paginas.agendar.agendamento_exame');
     }
 }

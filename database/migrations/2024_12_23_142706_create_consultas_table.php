@@ -16,10 +16,6 @@ return new class extends Migration
             $table->foreignId('atendimento_id')->constrained()->onDelete('cascade');
             $table->foreignId('pessoal_clinico_id')->constrained()->onDelete('cascade');
             $table->date('data');
-            // Registrar diagnóstico.
-            // Prescrever medicamentos.
-            // Solicitar exames.
-            // Encaminhar para internação ou alta.
             $table->text('diagnostico');
             $table->text('examesSolicitados');
             $table->softDeletes();

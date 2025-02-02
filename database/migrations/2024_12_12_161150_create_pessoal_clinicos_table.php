@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('especialidade_id')->constrained()->cascadeOnDelete();
+            $table->string('numOrdem')->nullable(); //Um identificador para referência interna. Exemplo: ADM, CARDIO, LAB.
             $table->softDeletes();
             $table->timestamps();
         });

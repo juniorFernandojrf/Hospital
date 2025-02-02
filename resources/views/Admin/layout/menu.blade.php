@@ -106,7 +106,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('cadastro_pclinico') }}">Pessoal Clínico</a></li>
-                    <li><a href="{{ route('especialidade') }}">Especialidade</a></li>
+                    <li><a href="{{ route('especialidade_create') }}">Especialidade</a></li>
                     <li><a href="{{ route('exames') }}">Exames</a></li>
                     <li><a href="{{ route('consultas') }}">Consultas</a></li>
                     <li><a href="">#####</a></li>
@@ -119,6 +119,7 @@
                 <ul aria-expanded="false">
                     <li><a href="{{ route('listar_paciente') }}">Listar Pacientes</a></li>
                     <li><a href="{{ route('listar_pclinico') }}">Listar Pessoal Clínico</a></li>
+                    <li><a href="{{ route('especialidade') }}">Listar Especialidade</a></li>
                     <li><a href="{{ route('listar_consulta') }}">Listar Consultas</a></li>
                     <li><a href="{{ route('listar_exame') }}">Listar Exames</a></li>
                 </ul>

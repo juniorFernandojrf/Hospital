@@ -12,7 +12,10 @@ class TriagemController extends Controller
      */
     public function index()
     {
-        //
+        $dateTriag = Triagem::paginate(10);
+
+        return view('PClinico.Enfermeiro.paginas.listar.listar_triagem', compact('dateTriag'));
+    
     }
 
     /**
@@ -20,7 +23,8 @@ class TriagemController extends Controller
      */
     public function create()
     {
-        //
+        return view('PClinico.Enfermeiro.paginas.cadastrar.cadastrar_triagem');
+
     }
 
     /**

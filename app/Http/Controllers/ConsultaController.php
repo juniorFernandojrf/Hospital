@@ -15,6 +15,10 @@ class ConsultaController extends Controller
         //
     }
 
+    public function list() {
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      */

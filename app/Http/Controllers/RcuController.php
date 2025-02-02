@@ -12,7 +12,12 @@ class RcuController extends Controller
      */
     public function index()
     {
-        //
+        return view('PClinico.Medico.paginas.listar.listar_consulta');
+    }
+
+    public function consulta()
+    {
+        return view('PClinico.Medico.paginas.listar.realizar_consulta');
     }
 
     /**
@@ -34,9 +39,9 @@ class RcuController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Rcu $rcu)
+    public function show()
     {
-        //
+       return view('PClinico.Medico.paginas.listar.detalhe_paciente');
     }
 
     /**

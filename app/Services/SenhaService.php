@@ -4,10 +4,11 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Hash;
 
-class SenhaService implements SenhaServiceInterface {
-
-    public function gerarSenha (){
-
+class SenhaService
+{
+    // Gerar Senha Automaticamente
+    public function gerarSenha()
+    {
         // Conjunto de caracteres para gerar a senha
         $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=';
         $senha = '';
@@ -22,14 +23,45 @@ class SenhaService implements SenhaServiceInterface {
         for ($i = 4; $i < 12; $i++) {
             $senha .= $characters[rand(0, strlen($characters) - 1)];
         }
-        
+
         // Embaralhar a senha para distribuir os caracteres
         $senha = str_shuffle($senha);
 
         return $senha;
     }
 
-    public function gerarhash (string $senha){
+    // Criptografar Senha
+    public function gerarhash(string $senha)
+    {
         return Hash::make($senha);
+    }
+
+    // Gerar Numero De Ordem 
+    function gerarNumDeOrdem($prefixo)
+    {
+        switch ($prefixo) {
+                        
+            case 'Medico':
+                $date = "MED";
+                break;
+            case 'Enfermeiro':
+                $date = "ENF";
+                break;
+            case 'Recepcionista':
+                $date = "SEC";
+                break;
+            default:
+                $date = "AU";
+                break;
+        }
+
+        // Obtém o timestamp atual
+        $timestamp = time();
+
+        // Gera um identificador único baseado no tempo atual e um número randômico
+        $idUnico = uniqid();
+
+        // Opcionalmente, adicione um prefixo para identificar o tipo de ordem
+        return strtoupper($date) . '-' . $timestamp . '-' . strtoupper(substr($idUnico, -6));
     }
 }

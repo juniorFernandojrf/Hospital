@@ -12,7 +12,11 @@ use Illuminate\Support\Facades\RateLimiter;
 use function Laravel\Prompts\password;
 
 class AutenticacaoController extends Controller
-{         
+{   
+    public function index() {
+        return;
+    }
+
     public function register(RegisterRequest $request)
     {
         $validated  = request()->validated();
