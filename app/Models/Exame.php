@@ -15,11 +15,16 @@ class Exame extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'especialidade_id',
         'tipo',
-        'data',
-        'resultado',
         'status',
     ];
+
+
+    public function especialidade()
+    {
+        return $this->belongsTo(Especialidade::class);
+    }
 
     public function pessoalClinico()
     {

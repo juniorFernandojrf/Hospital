@@ -22,8 +22,8 @@ class PClinicoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nome'  => 'required|string|max:255',
-            'email' => 'required|email|max:255|',
+            'nome'     => 'required|string|max:255',
+            'email'    => 'required|email|max:255|',
             'telefone' => 'required|min:9|max:9',
             'sexo'     => 'required|in:Masculino,Feminino',
             'especialidade' => 'required|string|max:255',

@@ -24,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Title -->
-    <title>Welly - Hospital Admin Dashboard Bootstrap HTML Template</title>
+    <title>Hospital LA VIDA</title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('../assetes/images/favicon.png') }}">
     <link href="{{ asset('../assetes/vendor/jqvmap/css/jqvmap.min.css') }}" rel="stylesheet">
@@ -792,6 +792,7 @@
             });
         });
     </script>
+    @yield('scripts')
 </body>
 
 <!-- Mirrored from welly.dexignzone.com/xhtml/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 30 Jun 2024 15:21:18 GMT -->

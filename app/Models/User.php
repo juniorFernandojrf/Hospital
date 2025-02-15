@@ -22,7 +22,7 @@ class User extends Authenticatable
         'sexo',
         'telefone',
         'email',
-        'senha',
+        'password',
     ];
 
     /**
@@ -45,22 +45,25 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    // Relacionamento entre um Usuario e Utente
-    public function utente(){                
-        return $this->hasOne(Utente::class);        
+    public function utentes()
+    {
+        return $this->hasMany(Utente::class);
     }
 
+    
     // Relacionamento entre um Usuario e Departamento
-    public function departamento(){                
-        return $this->belongsTo(Utente::class);        
+    public function departamento()
+    {
+        return $this->belongsTo(Utente::class);
     }
 
     // Relacionamento entre um Usuario e Seguradoras
-    public function seguradoras(){                
-        return $this->hasMany(Seguradora::class);        
+    public function seguradoras()
+    {
+        return $this->hasMany(Seguradora::class);
     }
-    
-    // Relacionamento entre um Usuario e PessoalClinico
+
+    // Relacionamento com PessoalClinico
     public function pessoalClinico()
     {
         return $this->hasOne(PessoalClinico::class);

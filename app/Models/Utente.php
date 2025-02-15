@@ -15,15 +15,18 @@ class Utente extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_id',
         'dataAnivers',
         'morada',
         'localizacao',
         'estadoCivil',
         'codigoPostal',
+        'status',
     ];
 
-    public function user(){                
-        return $this->belongsTo(Utente::class);        
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function seguradora(){                
@@ -33,7 +36,7 @@ class Utente extends Model
     public function atendimento(){                
         return $this->belongsTo(Atendimento::class);        
     }
-
+    
     public function historicoMedico(){ 
 
         return $this->hasOne(HistoricoMedico::class);        

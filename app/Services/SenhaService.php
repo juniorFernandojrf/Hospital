@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\PessoalClinico;
 use Illuminate\Support\Facades\Hash;
 
 class SenhaService
@@ -31,7 +32,7 @@ class SenhaService
     }
 
     // Criptografar Senha
-    public function gerarhash(string $senha)
+    public function gerarhash($senha)
     {
         return Hash::make($senha);
     }
@@ -48,20 +49,24 @@ class SenhaService
                 $date = "ENF";
                 break;
             case 'Recepcionista':
-                $date = "SEC";
+                $date = "RECP";
                 break;
             default:
                 $date = "AU";
                 break;
         }
 
-        // Obtém o timestamp atual
-        $timestamp = time();
+        // Exemplo de geração de número de ordem
+        $getPrefixo = strtoupper(substr($date, 0, 3)); 
 
-        // Gera um identificador único baseado no tempo atual e um número randômico
-        $idUnico = uniqid();
+        $ultimoRegistro = PessoalClinico::where('numOrdem', 'like', $getPrefixo . '%')->orderBy('id', 'desc')->first();
 
-        // Opcionalmente, adicione um prefixo para identificar o tipo de ordem
-        return strtoupper($date) . '-' . $timestamp . '-' . strtoupper(substr($idUnico, -6));
+        if ($ultimoRegistro) {
+            $numero = intval(substr($ultimoRegistro->numOrdem, -3)) + 1;
+        } else {
+            $numero = 1;
+        }
+
+        return $getPrefixo . '-'. '#' . str_pad($numero, 3, '0', STR_PAD_LEFT);        
     }
 }

@@ -13,8 +13,11 @@ return new class extends Migration
     {
         Schema::create('especialidade_pessoalclinico', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pessoal_clinico')->constrained()->onDelete('cascade');
-            $table->foreignId('especialidade_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('pessoal_clinico_id'); // Correto
+            $table->unsignedBigInteger('especialidade_id');   // Correto
+
+            $table->foreign('pessoal_clinico_id')->references('id')->on('pessoal_clinicos')->onDelete('cascade');
+            $table->foreign('especialidade_id')->references('id')->on('especialidades')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

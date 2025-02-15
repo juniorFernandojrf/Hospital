@@ -2,173 +2,148 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Services\PClinicoService;
+use App\Services\SenhaService;
+use App\Services\UserService;
+use App\Utils\DataSanitizationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
 
 use function Laravel\Prompts\password;
 
 class AutenticacaoController extends Controller
-{   
-    public function index() {
-        return;
+{
+    protected $senha;
+    protected $user;
+    protected $saniteze;
+    protected $pClinico;
+
+    public function __construct(
+        SenhaService $senha,
+        DataSanitizationService $saniteze,
+        UserService $user,
+        PClinicoService $pClinico,
+    ) {
+        $this->senha    = $senha;
+        $this->saniteze = $saniteze;
+        $this->user     = $user;
+        $this->pClinico = $pClinico;
     }
 
+    /**
+     * Método para registrar um novo usuário.
+     * Recebe os dados do formulário, valida-os e cria o usuário no banco de dados.
+     */
     public function register(RegisterRequest $request)
     {
-        $validated  = request()->validated();
+        $validated = $request->validated(); 
 
-        // Verifica se a senha foi enviada no formulário
-        if (!$validated->filled('senha')) {
+        // Sanitiza os dados do usuário (remove caracteres inválidos, formata campos, etc.)
+        $dados = $this->saniteze->sanitizeUser($validated);
 
-           // Conjunto de caracteres para gerar a senha
-           $caracters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=';
-           $senha = '';
+        $dados['password'] = $this->senha->gerarhash($validated['senha']); // Adiciona a senha criptografada aos dados sanitizados
 
-           // Garantir que haja ao menos uma letra maiúscula, uma minúscula, um número e um caractere especial
-           $senha .= $caracters[rand(26, 51)]; // Uma letra maiúscula
-           $senha .= $caracters[rand(0, 25)];  // Uma letra minúscula
-           $senha .= $caracters[rand(52, 61)]; // Um número
-           $senha .= $caracters[rand(62, strlen($caracters) - 1)]; // Um caractere especial
+        try {
+            // Inicia uma transação de banco de dados
+            DB::beginTransaction();             
 
-           // Preencher o restante da senha com caracteres aleatórios
-           for ($i = 4; $i < 12; $i++) {
-               $senha .= $caracters[rand(0, strlen($caracters) - 1)];
-           }
-           
-           // Embaralhar a senha para distribuir os caracteres
-           $senha = str_shuffle($senha);
+            // Cria o usuário no banco de dados
+            $user = $this->user->createUser($dados);
+        // dd($user->id);
 
-           $sanitizedData['senha'] = Hash::make($senha);  // Hasheia a senha(criptogafia) 
-           
-        } else {
-            $sanitizedData['senha'] = Hash::make($validated['senha']);  // Hasheia a senha(criptogafia)            
+            // Cria o relacionamento com o Utente (paciente) associado ao usuário
+            $utente = $this->user->createUtente($user->id, $this->saniteze->sanitizeUtente($validated));
+
+            // Cria o relacionamento com a Seguradora associada ao utente
+            $seguradora = $this->user->createSeguradora($utente->id, $this->saniteze->sanitizeSeguradora($validated));
+            // dd($seguradora);
+            
+            // Confirma a transação (salva todas as alterações no banco de dados)
+            DB::commit();
+
+            // Loga o usuário recém-criado
+            Auth::login($user);
+
+            // Redireciona o usuário para a página inicial com uma mensagem de sucesso
+            return redirect()->intended(route('inicio'))->with('success', 'Cadastro realizado com sucesso.');
+        } catch (\Exception $e) {
+            // Reverte a transação em caso de erro (nenhum dado será salvo no banco de dados)
+            DB::rollBack();
+
+            // Retorna uma mensagem de erro ao usuário
+            return back()->withErrors([
+                'message' => 'Ocorreu um erro ao realizar o cadastro. Por favor, tente novamente.',
+            ])->withInput(); // Mantém os dados preenchidos no formulário
         }
-
-        // Sanitização dos Dados
-        $sanitizedData = [
-            'nome'     => strip_tags($validated['nome']), // Remove tags HTML
-            'sexo'     => strip_tags($validated['sexo']), // Remove tags HTML
-            'telefone' => preg_replace('/\D/', '', $validated['telefone'] ?? ''), // Remove não numéricos
-            'email'    => filter_var($validated['email'], FILTER_SANITIZE_EMAIL), // Sanitiza e-mail
-            'dataAnivers'   => $validated['dataAnivers'] ?? null, // Mantém data válida
-            'morada'        => htmlspecialchars($validated['morada'] ?? '', ENT_QUOTES, 'UTF-8'),      // Escapa caracteres especiais
-            'localizacao'   => htmlspecialchars($validated['localizacao'] ?? '', ENT_QUOTES, 'UTF-8'), // Escapa caracteres especiais
-            'estadoCivil'   => strip_tags($validated['estadoCivil'] ?? ''), // Remove tags HTML
-            'codigoPostal'  => htmlspecialchars($validated['codigoPostal'] ?? '', ENT_QUOTES, 'UTF-8'),   // Escapa caracteres especiais
-            'entidaFinance' => htmlspecialchars($validated['entidaFinance'] ?? '', ENT_QUOTES, 'UTF-8'),  // Escapa caracteres especiais
-            'numSegura'     => intval($validated['numSegura'] ?? 0), // Converte para inteiro seguro
-        ];
-        
-
-        // Criação do Usuário
-        $user = User::create([
-            'nome'     => $sanitizedData['nome'],
-            'sexo'     => $sanitizedData['sexo'],
-            'telefone' => $sanitizedData['telefone'],
-            'email'    => $sanitizedData['email'],
-            'senha'    => $sanitizedData['senha'],
-        ]);
-
-        // Criação do Relacionamento com Utente bolt.new
-        $utente = $user->utente()->create([
-            'dataAnivers'  => $sanitizedData['dataAnivers'],
-            'morada'       => $sanitizedData['morada'],
-            'localizacao'  => $sanitizedData['localizacao'],
-            'estadoCivil'  => $sanitizedData['estadoCivil'],
-            'codigoPostal' => $sanitizedData['codigoPostal'],
-        ]);
-
-        $utente = $user->utente;
-        // Criação do Relacionamento com Seguradora
-        $utente->seguradora()->create([
-            'entidaFinance' => $sanitizedData['entidaFinance'],
-            'numSegura'     => $sanitizedData['numSegura'],
-        ]);
-
-        // Logar o usuario cadastrado   
-        // Auth::login($user);
-
-        return redirect()->intended(route('inicio'))->with('success', 'Cadastro realizado com sucesso.');
     }
 
-
-
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        // dd($request->all());
+        // Valida os dados do formulário usando o LoginRequest
+        $validated = $request->validated();
+        
+        // Sanitiza os dados de login
+        $sanitizedData = $this->saniteze->sanitizeLogin($validated);
 
-        $validated = $request->validate([
-            'telefone' => 'required|string|min:9|max:9',
-            'senha'    => 'required|string|min:8|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
-        ], [
-            'telefone.required' => 'O campo telefone é obrigatório.',
-            'telefone.string'   => 'O campo telefone deve ser uma string.',
-            'telefone.max'      => 'O campo telefone não deve exceder 9 caracteres.',
-            'telefone.min'      => 'O campo telefone deve ter pelo menos 9 caracteres.',
-            'senha.required' => 'O campo senha é obrigatório.',
-            'senha.string'   => 'O campo senha deve ser uma string.',
-            'senha.min'      => 'O campo senha deve ter pelo menos 8 caracteres.',
-            'senha.max'      => 'O campo senha não deve exceder 20 caracteres.',
-            'senha.regex'    => 'A senha deve incluir letras maiúsculas, minúsculas, números e caracteres especiais.',
-        ]);
-
-        // Sanitização dos Dados
-        $sanitizedData = [
-            'telefone' => preg_replace('/\D/', '', $validated['telefone'] ?? ''), // Remove não numéricos
-            'senha'    => Hash::make($validated['senha']), // Hasheia a senha(criptogafia)
-        ];
-
-        // Verificar tentativas excessivas de login para evitar força bruta
+        // dd($sanitizedData);
+        // Verifica tentativas excessivas de login para evitar ataques de força bruta
         $key = 'login-attempt:' . $request->ip();
-
         if (RateLimiter::tooManyAttempts($key, 5)) {
             return back()->withErrors([
                 'email' => 'Muitas tentativas de login. Tente novamente mais tarde.',
             ]);
         }
+        
+        try {
+            // dd($sanitizedData);
+            // Autenticação usando as credenciais fornecidas
+            if (!Auth::attempt($sanitizedData)) {
+                // Incrementa o contador de tentativas falhas
+                RateLimiter::hit($key, 60);
 
-        // RateLimiter::hit()
-        // Registra uma tentativa de login falha.
-        // hit($key, 60):
-        // $key: Identifica a tentativa, geralmente baseado no IP do cliente.
-        // 60: Define o tempo em segundos que a tentativa será bloqueada após atingir o limite (ex.: 5 tentativas).
+                // Retorna uma mensagem de erro específica para o usuário
+                return back()->withErrors([
+                    'message' => 'As credenciais estão incorretas. Verifique seu telefone e senha.',
+                ])->withInput(); // Mantém os dados preenchidos no formulário
+            }
 
-        // Autenticação usando as credenciais fornecidas
-        if (!Auth::attempt($request->only('telefone', 'senha'), $request->boolean('remember'))) {
-            RateLimiter::hit($key, 60); // Incrementar o contador com tempo de bloqueio de 1 minuto
+
+            // Limpa o contador de tentativas após um login bem-sucedido
+            RateLimiter::clear($key);          
+
+            return $this->pClinico->verificarPessoalClinico();
+
+      } catch (\Exception $e) {
+            // Em caso de erro inesperado, retorna uma mensagem genérica
             return back()->withErrors([
-                'email' => 'As credenciais estão incorretas.',
-            ]);
+                'message' => 'Ocorreu um erro ao realizar o login. Por favor, tente novamente.',
+            ])->withInput();
         }
-
-        // Sucesso no login
-        RateLimiter::clear($key);
-        $request->session()->regenerate(); // Regenerar o ID da sessão
-        return redirect()->intended(route('inicio'))->with('success', 'Login realizado com sucesso.');
     }
 
+    /**
+     * Método para deslogar um usuário.
+     * Invalida a sessão e redireciona o usuário para a página de login.
+     */
     public function logout(Request $request)
     {
-        // Invalidar o token da sessão autenticada
+        // Desloga o usuário autenticado
         Auth::logout();
 
-        // Invalida a sessão atual e gera um novo ID
+        // Invalida a sessão atual para garantir que o usuário seja desconectado
         $request->session()->invalidate();
+
+        // Regenera o token CSRF para evitar ataques de fixação de token
         $request->session()->regenerateToken();
 
-        // Redirecionar o usuário para a página inicial ou de login com mensagem de sucesso
+        // Redireciona o usuário para a página de login com uma mensagem de sucesso
         return redirect()->route('login')->with('success', 'Você foi desconectado com sucesso.');
     }
 
-    // public function form_login(){
-    //     return view('Autenticacao.login');
-    // }
-
-    // public function form_cadastro(){
-    //     return view('Autenticacao.cadastro');
-    // }
 }

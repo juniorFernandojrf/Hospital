@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Models\User;
+use App\Models\Seguradora;
+use App\Models\Utente;
 use Illuminate\Support\Facades\Hash;
 
 class UserService
@@ -14,26 +16,45 @@ class UserService
             'sexo'     => $dados['sexo'],
             'telefone' => $dados['telefone'],
             'email'    => $dados['email'],
-            'senha'    => $dados['senha'],
+            'password' => $dados['password'],
         ]);
     }
 
-    public function createUtente($user, array $dados)
+    public function createUtente($userId, array $dados)
     {
-        return $user->utente()->create([
-            'dataAnivers'  => $dados['dataAnivers'],
-            'morada'       => $dados['morada'],
-            'localizacao'  => $dados['localizacao'],
-            'estadoCivil'  => $dados['estadoCivil'],
-            'codigoPostal' => $dados['codigoPostal'],
-        ]);
+        try {
+            // Criar o utente com `create()`
+            $utente = Utente::create([
+                'user_id'      => $userId,
+                'dataAnivers'  => $dados['dataAnivers'] ?? null,
+                'morada'       => $dados['morada'] ?? null,
+                'localizacao'  => $dados['localizacao'] ?? null,
+                'estadoCivil'  => $dados['estadoCivil'] ?? null,
+                'codigoPostal' => $dados['codigoPostal'] ?? null,
+            ]);
+    
+            return $utente;
+        } catch (\Exception $e) {
+            
+            return null;
+        }
     }
+    
 
-    public function createSeguradora($utente, array $dados)
-    {
-        $utente->seguradora()->create([
-            'entidaFinance' => $dados['entidaFinance'],
-            'numSegura'     => intval($dados['numSegura']),
+    public function createSeguradora($utenteId, array $dados)
+{
+    try {
+        // Criar e salvar a seguradora
+        $seguradora = Seguradora::create([
+            'utente_id'     => $utenteId,
+            'entidaFinance' => $dados['entidaFinance'] ?? null,
+            'numSegura'     => intval($dados['numSegura'] ?? 0),
         ]);
+
+        return $seguradora;
+    } catch (\Exception $e) {
+        return null;
     }
+}
+
 }

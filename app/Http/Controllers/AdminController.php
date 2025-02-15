@@ -53,4 +53,11 @@ class AdminController extends Controller
     public function exames(){
         return view('Admin.paginas.cadastro_exames');
     }
+    
+    public function createPaciente (){
+        
+        return view('Admin.paginas.cadastro_exames');
+    }
+
+
 }

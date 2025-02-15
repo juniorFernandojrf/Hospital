@@ -15,20 +15,23 @@ class PessoalClinico extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'numeroOrdem',
+        'user_id',
+        'especialidade_id',
+        'numOrdem',
     ];
 
-    // Relacionamento entre um PessoalClinico e Utente
+    // Relacionamento com User
     public function user()
     {
         return $this->belongsTo(User::class);
-    }    
-
-    // Relacionamento entre um PessoalClinico e Especialidades
-    public function especialidades()
-    {
-        return $this->belongsToMany(Especialidade::class, 'especialidade_pessoalclinico');
     }
+
+    // Relacionamento com Especialidade
+    public function especialidade()
+    {
+        return $this->belongsTo(Especialidade::class);
+    }
+    
 
     // Relacionamento entre um PessoalClinico e Triagem
     public function triagem()

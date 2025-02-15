@@ -15,11 +15,11 @@ class Triagem extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'utente_id',
+        'user_id', 
         'pressaoArtirial',
-        'Temperatura',
+        'temperatura',
         'queixasInicias',
-        'descricao',
-        'ClassificRiscos',
     ];
 
     public function atendimento(){                        

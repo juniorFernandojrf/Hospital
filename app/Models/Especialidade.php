@@ -19,8 +19,15 @@ class Especialidade extends Model
         'estado',
     ];
 
-    public function pessoalClinico()
+    // Relacionamento com PessoalClinico
+    public function pessoalClinicos()
     {
-        return $this->belongsToMany(PessoalClinico::class, 'especialidade_pessoalclinico');
+        return $this->hasMany(PessoalClinico::class);
     }
+
+    public function exame()
+    {
+        return $this->hasOne(Exame::class);
+    }
+    
 }

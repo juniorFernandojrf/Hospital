@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Triagem;
+use App\Models\Utente;
 use Illuminate\Http\Request;
 
 class TriagemController extends Controller
@@ -12,35 +13,36 @@ class TriagemController extends Controller
      */
     public function index()
     {
-        $dateTriag = Triagem::paginate(10);
-
-        return view('PClinico.Enfermeiro.paginas.listar.listar_triagem', compact('dateTriag'));
-    
+        return view('PClinico.Enfermeiro.paginas.listar.listar_pacientes');
+        
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        return view('PClinico.Enfermeiro.paginas.cadastrar.cadastrar_triagem');
-
+    public function listar()
+    {        
+        return view('PClinico.Enfermeiro.paginas.listar.listar_triagem');
     }
-
+    
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
-    }
+        $userId = auth()->id();
 
+        $dadosTriagem = Triagem::create();
+    }
+    
     /**
      * Display the specified resource.
      */
-    public function show(Triagem $triagem)
+    public function show($id)
     {
-        //
+        $UtenteTriagem = Utente::find($id)->first();
+
+        return view('PClinico.Enfermeiro.paginas.listar.detalhe_paciente', compact('UtenteTriagem'));       
     }
 
     /**

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('localizacao');
             $table->string('estadoCivil');
             $table->integer('codigoPostal');
+            $table->enum('status', ['activo', 'inactivo','concluido'])->default('activo');
             $table->softDeletes();
             $table->timestamps();
 

@@ -7,24 +7,24 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Executa as migrações.
      */
     public function up(): void
     {
         Schema::create('historico_medicos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('utente_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('historico_familiar_id')->constrained()->cascadeOnDelete();
-            $table->string('alergia');
-            $table->string('medicamentosEmUso');
-            $table->string('estiloDeVida');
+            $table->foreignId('historico_familiar_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->text('alergia')->nullable();
+            $table->text('medicamentos_em_uso')->nullable();
+            $table->text('estilo_de_vida')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverter as migrações.
      */
     public function down(): void
     {

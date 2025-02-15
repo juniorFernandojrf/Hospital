@@ -20,42 +20,44 @@
                     </div>
                     <div class="card-body">
                         <div class="basic-form">
-                            <form>
-
+                            <form action="{{ route('exames') }} " method="POST">
+                                @csrf
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label>Tipo de Exme</label>
-                                        <input type="text" class="form-control" placeholder="Digite o tipo">
+                                        <input type="text" class="form-control" placeholder="Digite o tipo" name="tipo">
                                     </div>
-
 
                                     <div class="form-group col-md-6">
                                         <label>Especialidade</label>
-                                        <select class="form-control default-select">
-                                            <option>Dermatologia</option>
-                                            <option>Dentista</option>
-                                            <option>Enfermeiro</option>
-                                            <option>Fisioterapia</option>
-                                            <option>CArdiologista</option>
+                                        <select class="form-control default-select" name="especialidade_id">
+                                          
+                                            @foreach ($dateEsp as $dado)
+                                            {{-- carregar todas as especialidade --}}
+                                                <option name="{{ $dado->id }}" value="{{ $dado->id }}">{{ $dado->nome }} </option>
+                                                {{-- <input type="hidden" name="{{ $dado->id }}"> --}}
+                                            @endforeach
+
                                         </select>
+                                        @error('especialidade')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
                                     </div>
+
+                                    
+
                                     <div class="form-group col-md-6">
                                         <label>Estado</label>
-                                        <select class="form-control default-select">
-                                            <option>Ativo</option>
-                                            <option>Não Ativo</option>
+                                        <select class="form-control default-select" name="status">
+                                            <option value="Ativo" selected>Ativo</option>
+                                            <option value="Desativo">Desactivo</option>
                                         </select>
                                     </div>
 
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox">
-                                        <label class="form-check-label">
-                                            Concordas?
-                                        </label>
-                                    </div>
+                                    
                                 </div>
                                 <button type="submit" class="btn btn-primary">Cadastrar</button>
                             </form>

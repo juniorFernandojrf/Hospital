@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('consultas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('atendimento_id')->constrained()->onDelete('cascade');
-            $table->foreignId('pessoal_clinico_id')->constrained()->onDelete('cascade');
-            $table->date('data');
+            $table->foreignId('utente_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->text('diagnostico');
-            $table->text('examesSolicitados');
+            $table->text('exames_solicitados'); // Nome corrigido
             $table->softDeletes();
             $table->timestamps();
         });

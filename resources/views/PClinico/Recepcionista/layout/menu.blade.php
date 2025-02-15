@@ -16,6 +16,7 @@
                 </a>
                 <ul aria-expanded="false">
                     <li><a href="{{ route('atendimento_index') }}">Listar Pacientes</a></li>
+                    <li><a href="{{ route('paciente_encaminhado') }}"> Pacientes Encaminhados</a></li>
                 </ul>
             </li>
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -23,7 +24,6 @@
                     <span class="nav-text">Marcações</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="#">Consulta</a></li>
                     <li><a href="#">Exame</a></li>
                 </ul>
             </li>

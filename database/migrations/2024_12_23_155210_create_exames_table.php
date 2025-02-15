@@ -13,12 +13,10 @@ return new class extends Migration
     {
         Schema::create('exames', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('atendimento_id')->constrained()->cascadeOnDelete(); 
-            $table->foreignId('pessoal_clinico_id')->constrained()->cascadeOnDelete(); 
+            $table->unsignedBigInteger('especialidade_id'); // Criação da coluna
+            $table->foreign('especialidade_id')->references('id')->on('especialidades'); // Definição da FK
             $table->string('tipo');
-            $table->date('data');
-            $table->text('resultado')->nullable();
-            $table->string('status')->default('Em_andamento');
+            $table->enum('status', ['Ativo', 'Desativo']);
             $table->timestamps();
         });
     }

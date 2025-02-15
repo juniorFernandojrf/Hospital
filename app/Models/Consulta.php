@@ -15,7 +15,8 @@ class Consulta extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'data',
+        'utente_id' => 1,
+        'user_id',
         'diagnostico',
         'examesSolicitados',
     ];

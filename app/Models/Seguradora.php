@@ -15,6 +15,7 @@ class Seguradora extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'utente_id',
         'entidaFinance',
         'numSegura',
     ];

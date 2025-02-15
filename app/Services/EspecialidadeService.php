@@ -28,6 +28,6 @@ class EspecialidadeService
     {
         return // Deleta o registro
         $especialidade->delete();
-    ;
+   
     }
 }

@@ -26,6 +26,7 @@ class RegisterRequest extends FormRequest
             'sexo'     => 'required|string',
             'telefone' => 'required|string|min:9|max:15',
             'email'    => 'required|email|unique:users,email',
+            'senha'    => 'required|string|min:8|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/',
             'dataAnivers'   => 'required|date',
             'morada'        => 'required|string|max:255',
             'localizacao'   => 'required|string|max:255',
@@ -35,11 +36,6 @@ class RegisterRequest extends FormRequest
             'numSegura'     => 'nullable|string|max:255',
         ];
 
-        // Adiciona regras de senha condicionalmente
-        if ($this->filled('senha')) {
-            $rules ['senha' ] = 'required|string|min:8|confirmed|regex:/[a-z]/|regex:/[A-Z]/|regex:/[0-9]/|regex:/[@$!%*#?&]/';
-        }
-        
         return $rules;
     }
 

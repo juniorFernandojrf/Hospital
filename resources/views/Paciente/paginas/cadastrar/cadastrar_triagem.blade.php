@@ -1,9 +1,12 @@
-@extends('PClinico.Recepcionista.layout.master_admin')
+@extends('PClinico.Enfermeiro.layout.master_admin')
 @section('sessao_admin')
     <div class="content-body">
         <div class="container-fluid">
             <div class="page-titles">
-                <h4>Cadastro de Paciente</h4>                
+                <h4>Cadastro de Paciente</h4>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active"><a href="{{ route('pagina_inicial') }}">Voltar</a></li>
+                </ol>
             </div>
             <!-- row -->
             <div class="row">

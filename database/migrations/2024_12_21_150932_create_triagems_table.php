@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('triagems', function (Blueprint $table) {
+        Schema::create('triagens', function (Blueprint $table) { // Nome no plural corrigido para "triagens"
             $table->id();            
-            $table->foreignId('atendimento_id')->constrained()->cascadeOnDelete(); 
-            $table->foreignId('pessoal_clinico_id')->constrained()->cascadeOnDelete(); 
-            $table->string('pressaoArtirial'); 
-            $table->string('Temperatura'); 
-            $table->text('queixasInicias');
-            $table->text('descricao');
-            $table->enum('ClassificRiscos',['Normal','Urgente','Emergencia']);
+            $table->foreignId('utente_id')->constrained()->cascadeOnDelete(); 
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); 
+            $table->string('pressao_arterial'); // Nome corrigido
+            $table->string('temperatura'); // Nome padronizado
+            $table->text('queixas_iniciais'); // Nome corrigido
             $table->softDeletes();
             $table->timestamps();
         });
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('triagems');
+        Schema::dropIfExists('triagens'); // Nome atualizado
     }
 };

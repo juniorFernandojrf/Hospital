@@ -1,607 +1,171 @@
 @extends('PClinico.Enfermeiro.layout.master_admin')
 @section('sessao_admin')
     <!--**********************************
-                        Content body start
-                    ***********************************-->
+                            Content body start
+                        ***********************************-->
     <div class="content-body">
         <!-- row -->
         <div class="container-fluid">
             <div class="form-head align-items-center d-flex mb-sm-4 mb-3">
                 <div class="me-auto">
-                    <h2 class="text-black font-w600">Patient</h2>
-                    <p class="mb-0">Hospital Admin Dashboard Template</p>
-                </div>
-                <div>
-                    <a href="javascript:void(0)" class="btn btn-primary me-3" data-bs-toggle="modal"
-                        data-bs-target="#addOrderModal">+ New Patient</a>
-                    <a href="index.html" class="btn btn-outline-primary"><i
-                            class="las la-calendar-plus scale5 me-3"></i>Filter Date</a>
-                </div>
+                    <h2 class="text-black font-w600">Triagem Dos Pacientes </h2>
+                </div>                
             </div>
-            <!-- Add Order -->
-            <div class="modal fade" id="addOrderModal">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Add Contact</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal">
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form>
-                                <div class="form-group">
-                                    <label class="text-black font-w500">Patient Name</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-black font-w500">Patient ID</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-black font-w500">Disease</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                                <div class="form-group">
-                                    <label class="text-black font-w500">Date Check In</label>
-                                    <input type="date" class="form-control">
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <div class="row">
-                <div class="col-xl-12">
-                    <div class="table-responsive card-table">
-                        <table id="example5" class="display dataTablesCard white-border table-responsive-xl">
-                            <thead>
-                                <tr>
-                                    <th>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="checkAll" required="">
-                                            <label class="form-check-label" for="checkAll"></label>
-                                        </div>
-                                    </th>
-                                    <th>Patient ID</th>
-                                    <th>Date Check In</th>
-                                    <th>Nome</th>
-                                    <th>E-mail</th>
-                                    <th>Telefone</th>
-                                    <th>Genero</th>
-                                    <th>Room No</th>
-                                    <th class="text-end">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="form-check  custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox2"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox2"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-00014</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>Cive Slauw</td>
-                                    <td>Dr. Samantha</td>
-                                    <td>Sleep Problem</td>
-                                    <td>
-                                        <span class="badge badge-outline-primary">
-                                            <i class="fa fa-circle text-primary me-1"></i>
-                                            New Patient
-                                        </span>
-                                    </td>
-                                    <td>AB-004</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox3"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox3"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-00015</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>Bella Simatupang</td>
-                                    <td>Dr. Olivia Jean</td>
-                                    <td>Hearing Loss</td>
-                                    <td>
-                                        <span class="badge badge-info light">
-                                            <i class="fa fa-circle text-info me-1"></i>
-                                            Recovered
-                                        </span>
-                                    </td>
-                                    <td>AB-005</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox4"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox4"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-00018</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>Enjeline Sari</td>
-                                    <td>Dr. Gustauv Loi</td>
-                                    <td>Diabetes</td>
-                                    <td>
-                                        <span class="badge badge-info light">
-                                            <i class="fa fa-circle text-info me-1"></i>
-                                            Recovered
-                                        </span>
-                                    </td>
-                                    <td>AB-008</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox5"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox5"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-00017</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>David Bekam</td>
-                                    <td>Dr. Kevin Zidan</td>
-                                    <td>Alcoholism</td>
-                                    <td>
-                                        <span class="badge badge-warning light">
-                                            <i class="fa fa-circle text-warning me-1"></i>
-                                            In Treatment
-                                        </span>
-                                    </td>
-                                    <td>AB-007</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox6"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox6"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-00012</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>Alexia Kev</td>
-                                    <td>Dr. Samantha</td>
-                                    <td>Allergies & Asthma</td>
-                                    <td>
-                                        <span class="badge badge-warning light">
-                                            <i class="fa fa-circle text-warning me-1"></i>
-                                            In Treatment
-                                        </span>
-                                    </td>
-                                    <td>AB-002</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox7"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox7"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-00016</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>Brian Lucky</td>
-                                    <td>Not Assigned Yet</td>
-                                    <td>Cold & Flu</td>
-                                    <td>
-                                        <span class="badge badge-outline-primary">
-                                            <i class="fa fa-circle text-primary me-1"></i>
-                                            New Patient
-                                        </span>
-                                    </td>
-                                    <td>AB-005</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox8"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox8"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-00019</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>Eddy Cusuma</td>
-                                    <td>Dr. Samantha</td>
-                                    <td>Dental Care</td>
-                                    <td>
-                                        <span class="badge badge-warning light">
-                                            <i class="fa fa-circle text-warning me-1"></i>
-                                            In Treatment
-                                        </span>
-                                    </td>
-                                    <td>AB-005</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox9"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox9"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-000110</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>Frank Azire</td>
-                                    <td>Dr. David Lee</td>
-                                    <td>Allergies & Asthma</td>
-                                    <td>
-                                        <span class="badge badge-outline-primary">
-                                            <i class="fa fa-circle text-primary me-1"></i>
-                                            New Patient
-                                        </span>
-                                    </td>
-                                    <td>AB-005</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox321"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox321"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-00013</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>Andrew Stevano</td>
-                                    <td>Dr. Marcus Jr</td>
-                                    <td>Dental Care</td>
-                                    <td>
-                                        <span class="badge badge-warning light">
-                                            <i class="fa fa-circle text-warning me-1"></i>
-                                            In Treatment
-                                        </span>
-                                    </td>
-                                    <td>AB-005</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox32"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox32"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-00013</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>Andrew Stevano</td>
-                                    <td>Dr. Marcus Jr</td>
-                                    <td>Dental Care</td>
-                                    <td>
-                                        <span class="badge badge-warning light">
-                                            <i class="fa fa-circle text-warning me-1"></i>
-                                            In Treatment
-                                        </span>
-                                    </td>
-                                    <td>AB-005</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="form-check custom-checkbox">
-                                            <input type="checkbox" class="form-check-input" id="customCheckBox31"
-                                                required="">
-                                            <label class="form-check-label" for="customCheckBox31"></label>
-                                        </div>
-                                    </td>
-                                    <td>#P-00013</td>
-                                    <td>26/02/2020, 12:42 AM</td>
-                                    <td>Andrew Stevano</td>
-                                    <td>Dr. Marcus Jr</td>
-                                    <td>Dental Care</td>
-                                    <td>
-                                        <span class="badge badge-warning light">
-                                            <i class="fa fa-circle text-warning me-1"></i>
-                                            In Treatment
-                                        </span>
-                                    </td>
-                                    <td>AB-005</td>
-                                    <td>
-                                        <div class="dropdown ms-auto c-pointer text-end">
-                                            <div class="btn-link" data-bs-toggle="dropdown">
-                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 18C11.4477 18 11 18.4477 11 19C11 19.5523 11.4477 20 12 20C12.5523 20 13 19.5523 13 19C13 18.4477 12.5523 18 12 18Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M12 4C11.4477 4 11 4.44772 11 5C11 5.55228 11.4477 6 12 6C12.5523 6 13 5.55228 13 5C13 4.44772 12.5523 4 12 4Z"
-                                                        stroke="#2E2E2E" stroke-width="2" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                            </div>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="#">Accept Patient</a>
-                                                <a class="dropdown-item" href="#">Reject Order</a>
-                                                <a class="dropdown-item" href="#">View Details</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                <div class="col-12">
+                    <div class="card">                        
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example3" class="display min-w850 table table-striped table-bordered">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Foto</th>
+                                            <th>Nome</th>
+                                            <th>Nº de Ordem</th>
+                                            <th>Especialidade</th>
+                                            <th>Email</th>
+                                            <th>Telefone</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($datePclino as $dados)
+                                            <tr>
+                                                <td>
+                                                    <img class="rounded-circle" width="35"
+                                                        src="{{ asset('assets/images/profile/small/pic1.jpg') }}"
+                                                        alt="Foto do Pessoal Clínico">
+                                                </td>
+                                                <td>{{ $dados->user->nome }}</td>
+                                                <td>{{ $dados->numOrdem }}</td>
+                                                <td>{{ $dados->especialidade->nome }}</td>
+                                                <td>{{ $dados->user->email }}</td>
+                                                <td>{{ $dados->user->telefone }}</td>
+                                                <td>
+                                                    <div class="d-flex">                                                        
+                                                        <a href="javascript:void(0)" data-bs-toggle="modal"
+                                                            data-bs-target="#addOrderModal"
+                                                            class="btn btn-primary btn-xs me-1" title="Editar"><i
+                                                                class="fa fa-pencil"></i></a>
+                                                        <form action="{{ route('pclinico_destroy',$dados->user->id) }}"
+                                                            method="POST"
+                                                            onsubmit="return confirm('Tem certeza que deseja remover este registro?');">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-xs"
+                                                                title="Remover"><i class="fa fa-trash"></i></button>
+                                                        </form>
+                                                    </div>
+                                                    <!-- Add Order -->
+                                                    <div class="modal fade" id="addOrderModal">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Adicionar Paciente</h5>
+                                                                    <button type="button" class="btn-close"
+                                                                        data-bs-dismiss="modal">
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <form action="{{ route('pclinico_update', $dados->id) }}" onsubmit="return validarFormulario()" method="POST">
+                                                                        @csrf
+                                                                        @method('PUT')
+                                                                        <div class="row">
+                                                                            <!-- Nome -->
+                                                                            <div class="form-group col-md-6">
+                                                                                <label>Nome</label>
+                                                                                <input type="text" name="nome" class="form-control @error('nome') is-invalid @enderror" placeholder="Digite o nome" value="{{ old('nome') }}" required>
+                                                                                @error('nome')
+                                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                                @enderror
+                                                                            </div>
+                                    
+                                                                            <!-- Email -->
+                                                                            <div class="form-group col-md-6">
+                                                                                <label>Email</label>
+                                                                                <input type="email" id="email" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Informe o Email" value="{{ old('email') }}" required>
+                                                                                @error('email')
+                                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                                @enderror
+                                                                            </div>
+                                    
+                                                                            <!-- Telefone -->
+                                                                            <div class="form-group col-md-6">
+                                                                                <label>Telefone</label>
+                                                                                <input type="text" id="telefone" name="telefone" class="form-control @error('telefone') is-invalid @enderror" placeholder="Informe o Nº Telefone" value="{{ old('telefone') }}" required>
+                                                                                @error('telefone')
+                                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                                @enderror
+                                                                            </div>
+                                    
+                                                                            <!-- Gênero -->
+                                                                            <div class="form-group col-md-6">
+                                                                                <label>Gênero</label>
+                                                                                <select id="inputState" name="sexo" class="form-control default-select @error('sexo') is-invalid @enderror" required>
+                                                                                    <option selected disabled>Selecione</option>
+                                                                                    <option value="Masculino">Masculino</option>
+                                                                                    <option value="Feminino">Feminino</option>
+                                                                                </select>
+                                                                                @error('sexo')
+                                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                                @enderror
+                                                                            </div>
+                                    
+                                                                            <!-- Especialidade -->
+                                                                            <div class="form-group col-md-6">
+                                                                                <label>Especialidade</label>
+                                                                                <select class="form-control default-select @error('especialidade') is-invalid @enderror" name="especialidade" required>
+                                                                                    <option selected disabled>Selecione</option>
+                                                                                    @foreach ($dateEsp as $dado)
+                                                                                        <option value="{{ $dado->id }}">{{ $dado->nome }}</option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                                @error('especialidade')
+                                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                                @enderror
+                                                                            </div>
+                                    
+                                                                            <!-- Categoria -->
+                                                                            <div class="form-group col-md-6">
+                                                                                <label>Categoria</label>
+                                                                                <select class="form-control default-select @error('categoria') is-invalid @enderror" name="categoria" required>
+                                                                                    <option selected disabled>Selecione</option>
+                                                                                    <option value="Medico">Médico</option>
+                                                                                    <option value="Enfermeiro">Enfermeiro</option>
+                                                                                    <option value="Secretario">Secretário</option>
+                                                                                </select>
+                                                                                @error('categoria')
+                                                                                    <div class="invalid-feedback">{{ $message }}</div>
+                                                                                @enderror
+                                                                            </div>                                        
+                                    
+                                                                        </div>
+                                    
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-danger light"
+                                                                        data-bs-dismiss="modal">Cancelar</button>
+                                                                    <button type="button"
+                                                                        class="btn btn-primary">Cadastrar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!--**********************************
-                        Content body end
-                    ***********************************-->
+                            Content body end
+                        ***********************************-->
 @endsection
