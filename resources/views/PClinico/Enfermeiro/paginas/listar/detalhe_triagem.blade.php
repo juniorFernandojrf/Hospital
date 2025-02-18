@@ -6,19 +6,30 @@
 
             <div class="form-head d-flex align-items-center mb-sm-4 mb-3">
                 <div class="me-auto">
-                    <h2 class="text-black font-w600">Paciente: {{ $UtenteTriagem->user->nome }} </h2>
-                    <h4 class="mb-0"> Prontuario : </h4>
+                    <h2 class="text-black font-w600">Paciente: {{ $UtenteTriagem->nome }} </h2>
+                    <h4 class="mb-0">Número do Prontuario: </h4>
                 </div>
-                <a href="{{ route('create_Triagem', $UtenteTriagem->id ) }}" class="btn btn-primary me-3" > Criar </a>
-
             </div>
-            
+
+            <!-- Exibir mensagens de sucesso ou erro -->
+            @if (session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
+
             <div class="form-head page-titles d-flex mb-md-4">
                 <div class="d-sm-flex d-block mb-0 align-items-end">
                     <ul class="nav nav-pills review-tab me-3 mb-2">
                         <li class="nav-item">
                             <a href="#navpills-1" class="nav-link active" data-bs-toggle="tab"
                                 aria-expanded="false">Informações de Cadastro</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#navpills-2" class="nav-link" data-bs-toggle="tab" aria-expanded="true"> Dados Triagem
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -32,15 +43,15 @@
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item d-flex px-0 justify-content-between">
                                             <strong>Genero</strong>
-                                            <span class="mb-0">{{ $UtenteTriagem->user->sexo }} </span>
+                                            <span class="mb-0">{{ $UtenteTriagem->sexo }} </span>
                                         </li>
                                         <li class="list-group-item d-flex px-0 justify-content-between">
                                             <strong>Telefone</strong>
-                                            <span class="mb-0">{{ $UtenteTriagem->user->telefone }} </span>
+                                            <span class="mb-0">{{ $UtenteTriagem->telefone }} </span>
                                         </li>
                                         <li class="list-group-item d-flex px-0 justify-content-between">
                                             <strong>Email</strong>
-                                            <span class="mb-0">{{ $UtenteTriagem->user->email }} </span>
+                                            <span class="mb-0">{{ $UtenteTriagem->email }} </span>
                                         </li>
                                         <li class="list-group-item d-flex px-0 justify-content-between">
                                             <strong>Data de Aniversário</strong>
@@ -64,12 +75,33 @@
                                         </li>
                                         <li class="list-group-item d-flex px-0 justify-content-between">
                                             <strong>Seguradora</strong>
-                                            <span class="mb-0">{{ $UtenteTriagem->seguradora->estadoCivil }}</span>
+                                            <span class="mb-0">{{ $UtenteTriagem->entidaFinance }}</span>
                                         </li>
                                         <li class="list-group-item d-flex px-0 justify-content-between">
                                             <strong>Numero da Seguradora</strong>
-                                            <span class="mb-0">{{ $UtenteTriagem->seguradora->dataAnivers }}</span>
+                                            <span class="mb-0">{{ $UtenteTriagem->numSegura }}</span>
                                         </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="navpills-2" class="tab-pane  fade">
+                            <div class="card">
+                                <div class="card-body pb-0">
+                                    <ul class="list-group list-group-flush">                                        
+                                            <li class="list-group-item d-flex px-0 justify-content-between">
+                                                <strong>Pressão Arterial  </strong>
+                                                <span class="mb-0">{{ $UtenteTriagem->pressao_arterial }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex px-0 justify-content-between">
+                                                <strong>Temperatura</strong>
+                                                <span class="mb-0">{{ $UtenteTriagem->temperatura }}</span>
+                                            </li>
+                                            <li class="list-group-item d-flex px-0 justify-content-between">
+                                                <strong>Queixas Iniciais</strong>
+                                                <span class="mb-0">{{ $UtenteTriagem->queixas_iniciais }}</span>
+                                            </li>
+
                                     </ul>
                                 </div>
                             </div>

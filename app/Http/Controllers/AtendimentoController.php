@@ -8,6 +8,7 @@ use App\Services\SenhaService;
 use App\Services\UserService;
 use App\Utils\DataSanitizationService;
 use App\Http\Requests\RegisterRequest;
+use App\Services\SolicitarService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -16,16 +17,19 @@ class AtendimentoController extends Controller
 {
     protected $senha;
     protected $user;
+    protected $solicitar;
     protected $saniteze;
 
     public function __construct(
         SenhaService $senha,
         DataSanitizationService $saniteze,
+        SolicitarService $solicitar,
         UserService $user,
     ) {
-        $this->senha    = $senha;
-        $this->saniteze = $saniteze;
-        $this->user     = $user;
+        $this->senha     = $senha;
+        $this->saniteze  = $saniteze;
+        $this->user      = $user;
+        $this->solicitar = $solicitar;
     }
 
     /**
@@ -104,27 +108,28 @@ class AtendimentoController extends Controller
 
     public function solicitar(Request $request, $id)
     {
+        $dados = $this->solicitar->solicitar($id);
        
-    // Encontrar o Utente pelo ID
-    $utente = Utente::where('id', $id)->get();
-    $dados  = $utente->first();
+        // Encontrar o Utente pelo ID
+        $utente = Utente::where('id', $id)->get();
+        $dados  = $utente->first();
 
-    if (!$utente) {
-        return redirect(route('atendimento_index'))->with(['message' => 'Utente não encontrado'], 404);
-    }
+        if (!$utente) {
+            return redirect(route('atendimento_index'))->with(['message' => 'Utente não encontrado'], 404);
+        }
+        
+        if ($dados->status == 'activo') {
+            $dados->update([
+                'status' => 'inactivo'
+            ]);
+        } else {
+            $dados->update([
+                'status' => 'activo'
+            ]);
+        }
     
-    if ($dados->status == 'activo') {
-        $dados->update([
-            'status' => 'inactivo'
-        ]);
-    } else {
-        $dados->update([
-            'status' => 'activo'
-        ]);
-    }
- 
-    // Salvar as alterações
-    $dados->save();
+        // Salvar as alterações
+        $dados->save();
 
     return redirect(route('atendimento_index'))->with(['message' => 'Utente Foi Dirigido '], 404);
     

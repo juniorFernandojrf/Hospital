@@ -29,6 +29,11 @@ class Utente extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function atriagems()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function seguradora(){                
         return $this->hasOne(Seguradora::class);        
     }

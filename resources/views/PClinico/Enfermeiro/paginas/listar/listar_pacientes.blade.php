@@ -1,8 +1,8 @@
 @extends('PClinico.Enfermeiro.layout.master_admin')
 @section('sessao_admin')
     <!--**********************************
-                                                                Content body start
-                                                            ***********************************-->
+                                                                    Content body start
+                                                                ***********************************-->
     <div class="content-body">
         <!-- row -->
         <div class="container-fluid">
@@ -11,6 +11,15 @@
                     <h2 class="text-black font-w600"> Pacientes Para a Triagem </h2>
                 </div>
             </div>
+
+            <!-- Exibir mensagens de sucesso ou erro -->
+            @if (session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
 
             <div class="row">
                 <div class="card">
@@ -30,7 +39,7 @@
                                         <th>Action</th>
 
                                     </tr>
-                                    
+
                                 </thead>
                                 <tbody>
 
@@ -59,17 +68,14 @@
                                                         </svg>
                                                     </div>
                                                     <div class="dropdown-menu dropdown-menu-end">
-                                                        <form action="{{ route('triagem_show', $dados->id) }}" method="POST" style="display:inline;">
-                                                            @csrf
-                                                            @method('PUT')
-                                                        <button class="dropdown-item" type="submit">Aceitar</button>
-                                                        </form>    
+                                                        <a href="{{ route('triagem_aceitar', $dados->id ) }}"
+                                                            class="dropdown-item" type="submit">Aceitar</a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
                                     @endforeach
-                                    
+
                                 </tbody>
                             </table>
                         </div>
@@ -80,6 +86,6 @@
     </div>
     </div>
     <!--**********************************
-                                                                Content body end
-                                                            ***********************************-->
+                                                                    Content body end
+                                                                ***********************************-->
 @endsection

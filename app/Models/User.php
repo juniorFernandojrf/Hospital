@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->hasMany(Utente::class);
     }
 
+    public function atriagems()
+    {
+        return $this->hasMany(Atriagem::class);
+    }
+
     
     // Relacionamento entre um Usuario e Departamento
     public function departamento()

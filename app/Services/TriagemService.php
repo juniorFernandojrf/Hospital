@@ -2,20 +2,28 @@
 
 namespace App\Services;
 
+use App\Models\Atriagem;
 use App\Models\Triagem;
 
 class TriagemService
 {
-    public function createTriagem($utente_id, $user_id, array $dados)
+    public function createTriagem($request)
     {
-        return Triagem::create([
-            'utente_id'       => $utente_id,
-            'user_id'         => $user_id,
-            'pressaoArtirial' => $dados['pressaoArtirial'],
-            'temperatura'     => $dados['temperatura'],
-            'queixasInicias'  => $dados['queixasInicias'],
+        $Triagem = Atriagem::create([
+            'user_id'           => auth()->id(),
+            'utente_id'         => $request['utente_id'],
+            'pressao_arterial'  => $request['pressao_arterial'],
+            'temperatura'       => $request['temperatura'],
+            'queixas_iniciais'  => $request['queixas_iniciais'],
         ]);
+
+        return $Triagem;
     }
 
-    
+    public function updateTriagem(array $dados, $id)
+    {
+        $registro = Triagem::findOrFail($id);
+        $registro->update($dados);
+        return $registro;
+    }
 }

@@ -4,10 +4,11 @@
 
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-381-networking"></i>
-                    <span class="nav-text">Dashboard</span>
+                    <span class="nav-text">Dashboard</span>                    
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ route('consulta_listar') }}">Consultas</a></li>
+                    <li><a href="{{ route('med_index') }}">Painel</a></li>
+                    <li><a href="{{ route('med_listar') }}">Consultas</a></li>
                     <li><a href="#">Exame</a></li>
                 </ul>
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

@@ -11,7 +11,6 @@ use App\Services\UserService;
 use App\Utils\DataSanitizationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
 
@@ -64,6 +63,7 @@ class AutenticacaoController extends Controller
             $seguradora = $this->user->createSeguradora($utente->id, $this->saniteze->sanitizeSeguradora($validated));
             // dd($seguradora);
             
+            
             // Confirma a transação (salva todas as alterações no banco de dados)
             DB::commit();
 
@@ -71,7 +71,7 @@ class AutenticacaoController extends Controller
             Auth::login($user);
 
             // Redireciona o usuário para a página inicial com uma mensagem de sucesso
-            return redirect()->intended(route('inicio'))->with('success', 'Cadastro realizado com sucesso.');
+            return $this->pClinico->verificarPessoalClinico();
         } catch (\Exception $e) {
             // Reverte a transação em caso de erro (nenhum dado será salvo no banco de dados)
             DB::rollBack();

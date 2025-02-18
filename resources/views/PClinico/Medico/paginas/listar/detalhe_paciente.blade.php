@@ -63,7 +63,7 @@
                         <li class="nav-item">
                             <a href="#navpills-2" class="nav-link" data-bs-toggle="tab" aria-expanded="false">Histórico
                                 Clinico</a>
-                        </li>                        
+                        </li>
                         <li class="nav-item">
                             <a href="#navpills-4" class="nav-link" data-bs-toggle="tab" aria-expanded="true">Presquições
                                 Médicas </a>
@@ -120,27 +120,52 @@
                             </div>
                         </div>
                         <div id="navpills-2" class="tab-pane  fade">
-                            <div class="card">
-                                <div class="card-body pb-0">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <strong>Exames Realizados</strong>
-                                            <span class="mb-0">Male</span>
-                                            <span class="mb-0">Male</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <strong>Historico de Consulta</strong>
-                                            <span class="mb-0">PHD</span>
-                                        </li>
-                                        <li class="list-group-item d-flex px-0 justify-content-between">
-                                            <strong>Diagnostico</strong>
-                                            <span class="mb-0">PHD</span>
-                                        </li>
-
-                                    </ul>
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-header d-sm-flex d-block pb-0 border-0">
+                                        <div class="me-auto pe-3">
+                                            <h4 class="text-black fs-20 mb-0"></h4>
+                                        </div>
+                                        <div class="card-action card-tabs mt-3 mt-sm-0 mt-3 mb-sm-0 mb-3 mt-sm-0">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#Daily"
+                                                        role="tab">
+                                                        Exames Realizados
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#Weekly"
+                                                        role="tab">
+                                                        Historico de Consulta
+                                                    </a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#Monthly"
+                                                        role="tab">
+                                                        Diagnostico
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="Daily" role="tabpanel">
+                                               
+                                            </div>
+                                            <div class="tab-pane fade" id="Weekly" role="tabpanel">
+                                                
+                                            </div>
+                                            <div class="tab-pane fade" id="Monthly" role="tabpanel">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>                       
+
+                        </div>
                         <div id="navpills-4" class="tab-pane  fade">
                             <div class="col-3">
                                 <a href="javascript:void(0)" class="btn btn-primary me-3" data-bs-toggle="modal"
@@ -160,9 +185,9 @@
                                             <form>
                                                 <div class="form-group">
                                                     <label class="text-black font-w500">Descrição</label>
-                                                    <textarea id="mensagem" name="mensagem" rows="4" cols="50" ></textarea>
+                                                    <textarea id="mensagem" name="mensagem" rows="4" cols="50"></textarea>
                                                 </div>
-                                                
+
                                             </form>
                                         </div>
                                         <div class="modal-footer">

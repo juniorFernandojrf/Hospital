@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Atriagem;
 use App\Models\Especialidade;
 use App\Models\PessoalClinico;
 use App\Models\User;
@@ -30,9 +31,12 @@ class AppServiceProvider extends ServiceProvider
         $dateUtente = Utente::with('user')
                                 ->where('status', 'activo')
                                 ->get();
+                                
         $datePaciente = Utente::with('user')
                                 ->where('status', 'inactivo')
                                 ->get();
+                                
+        $dateTriagem = Atriagem::with('utente')->get();                        
 
         view()->share('dateEsp',      $dateEsp);
         view()->share('datePclino',   $datePclino);

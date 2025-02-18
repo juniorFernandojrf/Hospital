@@ -25,7 +25,7 @@ class DataSanitizationService
             'estadoCivil'   => strip_tags($dados['estadoCivil'] ?? ''), // Remove tags HTML
             'codigoPostal'  => htmlspecialchars($dados['codigoPostal'] ?? '', ENT_QUOTES, 'UTF-8'),   // Escapa caracteres especiais
         ];
-    }    
+    }
 
     public function sanitizeSeguradora(array $dados): array
     {
@@ -39,7 +39,7 @@ class DataSanitizationService
     {
         return [
             'email'    => filter_var($dados['email'], FILTER_SANITIZE_EMAIL), // Sanitiza e-mail
-            'password' => $dados['senha'], 
+            'password' => $dados['senha'],
         ];
     }
 
@@ -62,6 +62,16 @@ class DataSanitizationService
             'especialidade_id' => intval($dados['especialidade_id'] ?? 0),      // Escapa caracteres especiais
             'tipo'   => htmlspecialchars($dados['tipo'] ?? '', ENT_QUOTES, 'UTF-8'),      // Escapa caracteres especiais
             'status' => htmlspecialchars($dados['status'] ?? '', ENT_QUOTES, 'UTF-8'),      // Escapa caracteres especiais
+        ];
+    }
+
+    public function sanitezerTriagem(array $dados)
+    {
+        return [
+            'utente_id'        => intval($dados['utente_id'] ?? 0),
+            'pressao_arterial' => htmlspecialchars($dados['pressao_arterial'] ?? '', ENT_QUOTES, 'UTF-8'),
+            'temperatura'      => filter_var($dados['temperatura'] ?? '', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION),
+            'queixas_iniciais' => htmlspecialchars($dados['queixas_iniciais'] ?? '', ENT_QUOTES, 'UTF-8'),
         ];
     }
 }

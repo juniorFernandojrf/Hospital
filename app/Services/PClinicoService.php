@@ -27,7 +27,7 @@ class PClinicoService
 
         // Atualizar os dados do usuário
         $pessoalClinico->user->update([
-            'name' => $dataValidated['nome'],
+            'name'  => $dataValidated['nome'],
             'email' => $dataValidated['email'],
         ]);
 
@@ -49,7 +49,6 @@ class PClinicoService
         $adm = User::where('id', $user->id)->first();
         if($adm->nome == 'admin') {
             return redirect()->route('pclinico')->with('success', 'Login realizado com sucesso.');
-
         }
 
         // Verifica se o usuário autenticado está associado a um PessoalClinico

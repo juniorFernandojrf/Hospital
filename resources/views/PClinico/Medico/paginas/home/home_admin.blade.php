@@ -15,7 +15,7 @@
                     <div class="card-body">
                         <div class="media align-items-center">
                             <div class="media-body me-3">
-                                <h2 class="fs-34 text-black font-w600">00</h2>
+                                <h2 class="fs-34 text-black font-w600">{{ $UtenteTriagem->count() }}</h2>
                                 <span>Consulta</span>
                             </div>
                             <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
