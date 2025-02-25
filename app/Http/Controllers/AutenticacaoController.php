@@ -101,6 +101,7 @@ class AutenticacaoController extends Controller
         }
         
         try {
+            
             // dd($sanitizedData);
             // Autenticação usando as credenciais fornecidas
             if (!Auth::attempt($sanitizedData)) {
@@ -112,7 +113,6 @@ class AutenticacaoController extends Controller
                     'message' => 'As credenciais estão incorretas. Verifique seu telefone e senha.',
                 ])->withInput(); // Mantém os dados preenchidos no formulário
             }
-
 
             // Limpa o contador de tentativas após um login bem-sucedido
             RateLimiter::clear($key);          

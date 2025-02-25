@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('utente_id')->constrained()->cascadeOnDelete();
             $table->string('entidaFinance')->nullable();
-            $table->string('numSegura')->nullable();
+            $table->string('numSegura')    ->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

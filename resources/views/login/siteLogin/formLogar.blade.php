@@ -3,7 +3,7 @@
 @section('Form')
 
     <!-- Mensagem de Sucesso -->
-    @if(session('success'))
+    @if (session('success'))
         <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
             {{ session('success') }}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -11,7 +11,7 @@
     @endif
 
     <!-- Mensagem de Erro -->
-    @if($errors->any())
+    @if ($errors->any())
         <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
             <ul class="mb-0">
                 @foreach ($errors->all() as $error)
@@ -41,9 +41,10 @@
                         @csrf
                         <div class="mb-3">
                             <label for="inputPhone" class="form-label">Email</label>
-                            <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                id="inputPhone" name="email" placeholder="Informe seu email"
-                                value="{{ old('email') }}" required>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="inputPhone"
+                                name="email" placeholder="Informe seu email" value="{{ old('email') }}" required
+                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                title="Informe um email válido (ex: exemplo@dominio.com)">
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

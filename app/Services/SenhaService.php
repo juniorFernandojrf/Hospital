@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\PessoalClinico;
+use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
 
 class SenhaService

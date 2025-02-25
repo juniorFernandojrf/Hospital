@@ -48,7 +48,7 @@
                                                         <a href="{{ route('especialidade_editar', $dado->id) }}"
                                                             class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                                 class="fa fa-pencil"></i></a><!-- Botão de remoção -->
-                                                        <form action="{{ route('especialidade_destroy', $dado->id) }}"
+                                                        <form action="{{ route('especialidade_deletar', $dado->id) }}"
                                                             method="POST"
                                                             onsubmit="return confirm('Tem certeza que deseja remover esta especialidade?');">
                                                             @csrf

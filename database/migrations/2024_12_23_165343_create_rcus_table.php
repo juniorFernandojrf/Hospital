@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('rcus', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('utente_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('utente_id')          ->constrained()->cascadeOnDelete();
             $table->foreignId('historico_medico_id')->constrained()->cascadeOnDelete();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

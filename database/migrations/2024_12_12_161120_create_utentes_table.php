@@ -21,8 +21,7 @@ return new class extends Migration
             $table->string('estadoCivil');
             $table->integer('codigoPostal');
             $table->enum('status', ['activo', 'inactivo','concluido'])->default('activo');
-            $table->softDeletes();
-            $table->timestamps();
+           $table->timestamps();
 
         });
     }

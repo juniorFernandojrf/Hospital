@@ -15,15 +15,19 @@ class Consulta extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'utente_id' => 1,
-        'user_id',
-        'diagnostico',
-        'examesSolicitados',
+        'especialidade_id',
+        'tipo',
+        'status',
     ];
 
-     // Relacionamento entre um PessoalClinico e Utente
-     public function atendimento()
-     {
-         return $this->belongsTo(Atendimento::class);
-     }
+    // Relacionamento entre um PessoalClinico e Utente
+    public function atendimento()
+    {
+        return $this->belongsTo(Atendimento::class);
+    }
+
+    public function solicitarConsultas()
+    {
+        return $this->hasMany(SolicitarConsulta::class);
+    }
 }

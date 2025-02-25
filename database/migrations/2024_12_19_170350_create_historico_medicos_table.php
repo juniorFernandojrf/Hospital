@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('historico_familiar_id')->nullable()->constrained()->cascadeOnDelete();
             $table->text('alergia')->nullable();
             $table->text('medicamentos_em_uso')->nullable();
-            $table->text('estilo_de_vida')->nullable();
+            $table->text('estilo_de_vida')     ->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

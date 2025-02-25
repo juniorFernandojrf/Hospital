@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('especialidade_id');   // Correto
 
             $table->foreign('pessoal_clinico_id')->references('id')->on('pessoal_clinicos')->onDelete('cascade');
-            $table->foreign('especialidade_id')->references('id')->on('especialidades')->onDelete('cascade');
+            $table->foreign('especialidade_id')  ->references('id')->on('especialidades')  ->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

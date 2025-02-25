@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('departamentos', function (Blueprint $table) {
             $table->id();
-            $table->string('nome')->unique();
+            $table->string('nome')  ->unique();
             $table->string('sector')->nullable();
             $table->string('codigo')->nullable();//Um identificador para referência interna. Exemplo: ADM, CARDIO, LAB.
             $table->softDeletes();

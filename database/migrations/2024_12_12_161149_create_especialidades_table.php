@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nome');
             $table->string('estado');
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -26,5 +25,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('especialidades');
+               
     }
 };

@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('pessoal_clinicos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')         ->constrained()->cascadeOnDelete();
             $table->foreignId('especialidade_id')->constrained()->cascadeOnDelete();
             $table->string('numOrdem')->nullable(); //Um identificador para referência interna. Exemplo: ADM, CARDIO, LAB.
-            $table->softDeletes();
             $table->timestamps();
         });
     }

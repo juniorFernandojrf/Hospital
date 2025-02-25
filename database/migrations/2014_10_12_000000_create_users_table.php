@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome');
             $table->enum('sexo',['Masculino','Femenino']);
             $table->integer('telefone')->unique();
-            $table->string('email')->unique();
+            $table->string('email')    ->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
@@ -31,5 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('users');
+        
     }
 };

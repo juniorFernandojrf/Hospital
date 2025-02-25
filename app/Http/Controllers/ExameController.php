@@ -6,6 +6,7 @@ use App\Http\Requests\ExemeRequest;
 use App\Models\Exame;
 use App\Services\ExameService;
 use App\Utils\DataSanitizationService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -45,19 +46,18 @@ class ExameController extends Controller
     public function store(ExemeRequest $request)
     {
         $validated = $request->validated();
-        
+
         try {
             DB::beginTransaction();
             // dd($validated);
 
             $dadosSanitize = $this->sanitize->sanitezerExame($validated);
-            
+
             $dadosExame = $this->exame->createExame($dadosSanitize);
             // dd($dadosExame);
 
             DB::commit();
             return redirect()->route('listar_exame', compact('dadosExame'))->with('success', 'Exame cadastrado com sucesso!');
-        
         } catch (\Exception $e) {
             DB::rollback();
 
@@ -69,7 +69,7 @@ class ExameController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(ExemeRequest $request,$id)
+    public function update(ExemeRequest $request, $id)
     {
         $validated = $request->validated();
 
@@ -88,5 +88,19 @@ class ExameController extends Controller
             return back()->withErrors(['error' => 'Erro ao atualizar o exame: ' . $e->getMessage()]);
         }
     }
- 
+
+    /**
+     * Remove o recurso especificado do banco de dados.
+     */
+    public function destroy($exame)
+    {
+        try {
+            $date = Exame::findOrFail($exame);
+            $date->delete();
+
+            return redirect()->route('listar_exame')->with('success', 'Consulta excluída com sucesso!');
+        } catch (Exception $e) {
+            return back()->with('error', 'Erro ao excluír consulta: ' . $e->getMessage());
+        }
+    }
 }

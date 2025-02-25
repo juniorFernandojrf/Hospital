@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('atriagems', function (Blueprint $table) {
             $table->id();
             $table->foreignId('utente_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')  ->constrained()->cascadeOnDelete();
             $table->string('pressao_arterial'); // Nome corrigido
             $table->string('temperatura'); // Nome padronizado
             $table->text('queixas_iniciais'); // Nome corrigido

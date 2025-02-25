@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('consultas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('utente_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->text('diagnostico');
-            $table->text('exames_solicitados'); // Nome corrigido
+            $table->foreignId('especialidade_id')->constrained()->cascadeOnDelete();
+            $table->string('tipo');
+            $table->enum('status', ['Ativo', 'Desativo']);            
             $table->softDeletes();
             $table->timestamps();
         });

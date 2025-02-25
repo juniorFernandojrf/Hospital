@@ -46,4 +46,14 @@ class Utente extends Model
 
         return $this->hasOne(HistoricoMedico::class);        
     }
+
+    public function solicitarExames()
+    {
+        return $this->hasMany(SolicitarExame::class);
+    }
+
+    public function solicitarConsultas()
+    {
+        return $this->hasMany(SolicitarConsulta::class);
+    }
 }

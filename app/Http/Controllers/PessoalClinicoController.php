@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PClinicoRequest;
 use App\Models\PessoalClinico;
+use App\Models\Role;
 use App\Services\PClinicoService;
 use App\Services\SenhaService;
 use App\Services\UserService;
@@ -67,6 +68,7 @@ class PessoalClinicoController extends Controller
             // Criar o registro de pessoal clínico
             $pClinico = $this->pClinico->cadastrarPClinico($user->id, $dataValidated['especialidade'], $numOrdem);
 
+            
             DB::commit();
 
             return view('Admin.paginas.detalhe.datalhes_pclinico.blade')->with(['message' => 'Pessoal clínico cadastrado com sucesso!'], 201);

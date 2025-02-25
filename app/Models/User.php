@@ -55,7 +55,7 @@ class User extends Authenticatable
         return $this->hasMany(Atriagem::class);
     }
 
-    
+
     // Relacionamento entre um Usuario e Departamento
     public function departamento()
     {
@@ -78,5 +78,38 @@ class User extends Authenticatable
     public function pessoalAdmin()
     {
         return $this->hasOne(PessoalAdmin::class);
+    }
+
+    public function solicitarExames()
+    {
+        return $this->hasMany(SolicitarExame::class);
+    }
+
+    public function solicitarConsultas()
+    {
+        return $this->hasMany(SolicitarConsulta::class);
+    }
+
+
+    // Relacionamento com papéis
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    // Verificar se o usuário tem um papel específico
+    public function hasRole($roleName)
+    {
+        return $this->roles()->where('name', $roleName)->exists();
+    }
+
+    public function hasPermission($permission)
+    {
+        foreach ($this->roles as $role) {
+            if ($role->permissions()->where('name', $permission)->exists()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

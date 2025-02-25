@@ -6,6 +6,7 @@ use App\Http\Requests\EspecialidadeRequest;
 use App\Models\Especialidade;
 use App\Services\EspecialidadeService;
 use App\Utils\DataSanitizationService;
+use Exception;
 use Illuminate\Http\Request;
 
 class EspecialidadeController extends Controller
@@ -26,7 +27,7 @@ class EspecialidadeController extends Controller
     public function index()
     {
         $dateEsp = Especialidade::paginate(10);
-
+        
         return view('Admin.paginas.listar.listar_especialidade', compact('dateEsp'));
     }
 
@@ -92,11 +93,18 @@ class EspecialidadeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Especialidade $especialidade)
+    public function destroy($especialidade)
     {
-        $this->especialidade->destroy($especialidade);
+
+        try {
+            $date = Especialidade::findOrFail($especialidade);
+            $date->delete();
+
+            return redirect()->route('especialidade')->with('success', 'Especialidade excluída com sucesso!');
+        } catch (Exception $e) {
+            return back()->with('error', 'Erro ao excluír Especialidade: ' . $e->getMessage());
+        }
 
         // Redireciona com mensagem de sucesso
-        return redirect()->route('especialidade')->with('success', 'Especialidade excluída com sucesso!');
     }
 }

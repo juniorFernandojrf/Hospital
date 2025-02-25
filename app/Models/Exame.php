@@ -30,4 +30,9 @@ class Exame extends Model
     {
         return $this->belongsTo(PessoalClinico::class);
     }
+
+    public function solicitarExames()
+    {
+        return $this->hasMany(SolicitarExame::class);
+    }
 }

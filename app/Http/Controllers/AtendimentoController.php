@@ -37,8 +37,7 @@ class AtendimentoController extends Controller
      */
     public function index()
     {
-        return view('PClinico.Recepcionista.paginas.listar.listar_paciente');
-    
+        return view('PClinico.Recepcionista.paginas.listar.listar_paciente');    
     }
     
     /**

@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('pessoal_admins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')        ->constrained()->cascadeOnDelete();
             $table->foreignId('departamento_id')->constrained()->cascadeOnDelete();
             $table->string('cargo')->unique();
-            $table->softDeletes();
             $table->timestamps();
         });
     }

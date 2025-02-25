@@ -92,12 +92,7 @@
 
                                     <!-- Checkbox de Confirmação -->
                                     <div class="form-group">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" required>
-                                            <label class="form-check-label">
-                                                Concorda com as alterações?
-                                            </label>
-                                        </div>
+                                        
                                     </div>
 
                                     <!-- Botão de Atualização -->

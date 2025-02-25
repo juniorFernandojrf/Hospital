@@ -719,7 +719,7 @@
         <!--**********************************
             Header start
         ***********************************-->
-        @include('PClinico.Enfermeiro.layout.topo')
+        @include('Paciente.layout.topo')
         <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
@@ -727,7 +727,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        @include('PClinico.Enfermeiro.layout.menu')
+        @include('Paciente.layout.menu')
         <!--**********************************
             Sidebar end
         ***********************************-->
@@ -743,7 +743,7 @@
         <!--**********************************
             Footer start
         ***********************************-->
-        @include('PClinico.Enfermeiro.layout.footer')
+        @include('Paciente.layout.footer')
         <!--**********************************
             Footer end
         ***********************************-->

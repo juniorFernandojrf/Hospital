@@ -16,7 +16,6 @@ return new class extends Migration
             $table->foreignId('utente_id')->constrained()->cascadeOnDelete();
             $table->dateTime('horaChegada');
             $table->string('status')->default('Em_progresso');
-            $table->softDeletes();
             $table->timestamps();
 
         });
