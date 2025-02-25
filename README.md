@@ -1,2 +1,2 @@
 # Hospital
- Sistema de Informação de Saúde  feito em Html e Css no Back-end usando o Laravel
+ Sistema de Informação de Saúde  feito em Html,Css e javascript no Back-end usando o Laravel
